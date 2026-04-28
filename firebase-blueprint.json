@@ -1,0 +1,49 @@
+{
+  "entities": {
+    "bookingRequest": {
+      "title": "Booking Request",
+      "description": "A request for a tattoo appointment consultation.",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string", "description": "Client's full name" },
+        "email": { "type": "string", "format": "email", "description": "Client's contact email" },
+        "artist": { "type": "string", "description": "Preferred artist name" },
+        "style": { "type": "string", "description": "Proposed tattoo style" },
+        "vision": { "type": "string", "description": "Description of the tattoo vision" },
+        "preferredDate": { "type": "string", "description": "Desired date for the appointment" },
+        "preferredTime": { "type": "string", "description": "Desired time for the appointment" },
+        "referenceImage": { "type": "string", "description": "Base64 or URL of the reference image" },
+        "status": { "type": "string", "enum": ["pending", "contacted", "scheduled", "completed", "cancelled"], "description": "Current status of the request" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the request was created" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "When the request was last updated" }
+      },
+      "required": ["fullName", "email", "artist", "style", "vision", "status", "createdAt", "updatedAt"]
+    },
+    "blogPost": {
+      "title": "Blog Post",
+      "description": "An article or news update for the tattoo studio journal.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "Post title" },
+        "excerpt": { "type": "string", "description": "Short summary" },
+        "content": { "type": "string", "description": "Full article content" },
+        "category": { "type": "string", "description": "Topic category" },
+        "authorId": { "type": "string", "description": "UID of the artist author" },
+        "authorName": { "type": "string", "description": "Name of the artist author" },
+        "image": { "type": "string", "description": "Banner image URL" },
+        "date": { "type": "string", "format": "date-time", "description": "Published date" }
+      },
+      "required": ["title", "excerpt", "content", "category", "authorId", "authorName", "image", "date"]
+    }
+  },
+  "firestore": {
+    "/bookingRequests/{requestId}": {
+      "schema": "bookingRequest",
+      "description": "Collection of appointment inquiries."
+    },
+    "/blogPosts/{postId}": {
+      "schema": "blogPost",
+      "description": "Collection of journal articles."
+    }
+  }
+}

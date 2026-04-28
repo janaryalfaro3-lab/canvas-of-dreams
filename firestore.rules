@@ -1,0 +1,104 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Primitives ---
+    function isSignedIn() { return request.auth != null; }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    
+    // Admin check - uses User email from runtime for initial bootstrapping if needed
+    // In production, this would look up an 'admins' collection
+    function isAdmin() { 
+      return isSignedIn() && (
+        request.auth.token.email == 'jaesthetic.info@gmail.com' ||
+        request.auth.token.email == 'johnharry.alfaro@gmail.com' || 
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    // --- Booking Requests ---
+    match /bookingRequests/{requestId} {
+      allow create: if (
+        isValidId(requestId) &&
+        isValidBookingRequest(incoming()) &&
+        incoming().status == 'pending' &&
+        incoming().createdAt == request.time &&
+        incoming().updatedAt == request.time
+      );
+
+      // Only admins/staff can read/list booking requests
+      allow get, list: if isAdmin();
+
+      allow update: if (
+        isAdmin() &&
+        isValidBookingRequest(incoming()) &&
+        incoming().createdAt == existing().createdAt &&
+        incoming().updatedAt == request.time && (
+          // Action: Process Request
+          (incoming().diff(existing()).affectedKeys().hasOnly(['status', 'updatedAt']))
+        )
+      );
+
+      allow delete: if isAdmin();
+    }
+
+    function isValidBookingRequest(data) {
+      return (
+        data.keys().hasAll(['fullName', 'email', 'artist', 'style', 'vision', 'status', 'createdAt', 'updatedAt', 'preferredDate', 'preferredTime']) &&
+        (data.keys().size() == 10 || (data.keys().size() == 11 && data.keys().hasAll(['referenceImage']))) &&
+        data.fullName is string && data.fullName.size() >= 2 && data.fullName.size() <= 100 &&
+        data.email is string && data.email.size() >= 5 && data.email.size() <= 100 &&
+        data.artist is string && data.artist.size() >= 2 && data.artist.size() <= 100 &&
+        data.style is string && data.style.size() >= 2 && data.style.size() <= 100 &&
+        data.vision is string && data.vision.size() >= 10 && data.vision.size() <= 10000 &&
+        data.preferredDate is string &&
+        data.preferredTime is string &&
+        (!data.keys().hasAll(['referenceImage']) || (data.referenceImage is string && data.referenceImage.size() <= 2000000)) &&
+        data.status in ['pending', 'contacted', 'scheduled', 'completed', 'cancelled']
+      );
+    }
+
+    // --- Blog Posts ---
+    match /blogPosts/{postId} {
+      allow read: if true; // Publicly readable
+
+      allow create: if (
+        isAdmin() && // Only admins (artists) can post
+        isValidId(postId) &&
+        isValidBlogPost(incoming()) &&
+        incoming().date == request.time &&
+        incoming().authorId == request.auth.uid
+      );
+
+      allow update: if (
+        isAdmin() &&
+        incoming().authorId == existing().authorId &&
+        isValidBlogPost(incoming()) &&
+        (incoming().diff(existing()).affectedKeys().hasOnly(['title', 'excerpt', 'content', 'category', 'image', 'updatedAt']))
+      );
+
+      allow delete: if isAdmin();
+    }
+
+    function isValidBlogPost(data) {
+      return (
+        data.keys().hasAll(['title', 'excerpt', 'content', 'category', 'authorId', 'authorName', 'image', 'date']) &&
+        data.keys().size() == 8 &&
+        data.title is string && data.title.size() <= 200 &&
+        data.excerpt is string && data.excerpt.size() <= 500 &&
+        data.content is string && data.content.size() <= 50000 &&
+        data.category is string && data.category.size() <= 50 &&
+        data.authorId is string &&
+        data.authorName is string &&
+        data.image is string && data.image.size() <= 500
+      );
+    }
+  }
+}
