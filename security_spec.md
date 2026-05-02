@@ -1,24 +1,28 @@
-# Security Specification - Canvas of Dreams
+# Security Specification for Canvas of Dreams
 
 ## Data Invariants
-- A booking request must have valid contact info and a vision.
-- Only the creator (artist) or admins can edit blog posts.
-- Booking requests are only readable by the studio (admins/artists), but anyone can create one.
+- A `GalleryItem` must have a valid title, category (from allowed list), artist name, and a valid image URL.
+- `likesCount` on a `GalleryItem` can only be incremented.
+- A `Booking` must have a valid email, full name, and creation timestamp.
+- User email in `Booking` must match the format.
 
-## The Dirty Dozen Payloads (Rejection Tests)
-1. **Identity Spoofing**: Attempt to create a booking request but setting `status` to 'completed' immediately.
-2. **Identity Spoofing**: Attempt to update someone else's booking request.
-3. **Identity Spoofing**: Attempt to create a blog post as a non-authenticated user.
-4. **State Shortcutting**: Attempt to update booking status from 'pending' to 'completed' without the intermediate steps (if flow was enforced, but here we just need to ensure only staff can do it).
-5. **Resource Poisoning**: Document ID with 2KB of junk characters.
-6. **Resource Poisoning**: Vision field in booking request with 2MB of text.
-7. **Shadow Update**: Adding `isVerified: true` to a booking request.
-8. **PII Leak**: Authenticated user (non-admin) trying to list all `bookingRequests`.
-9. **Timestamp Spoof**: Client-provided `createdAt` date from 2010.
-10. **Type Poisoning**: Sending an integer for the `vision` string field.
-11. **Orphaned Write**: Creating a blog post with a non-existent `authorId`.
-12. **Immortal Field Breach**: Attempting to change `createdAt` on an existing booking request.
+## The Dirty Dozen (Attack Vectors)
+1.  **Anonymous Delete**: Unauthorized user trying to delete a gallery item.
+2.  **Shadow Update**: Adding a `visibility: hidden` field to a public document.
+3.  **PII Leak**: Listing everyone's booking inquiries.
+4.  **Identity Spoofing**: Submitting a booking as another person's email. (Requires Auth eventually, for now we restrict `get` by ID if ID is sensitive).
+5.  **Timestamp Poisoning**: Setting a booking's `createdAt` to 2077.
+6.  **Negative Likes**: Setting `likesCount` to -999.
+7.  **Junk ID**: Creating a document with a 2MB string as ID.
+8.  **Empty Injection**: Creating a Booking with empty name/email.
+9.  **Type Collision**: Setting `likesCount` to a string "NaN".
+10. **State Shortcut**: Setting booking status directly to "completed" on submission.
+11. **Email Spoofing (if auth present)**: Using a known admin email without verification.
+12. **Mass Scrape**: Listing all bookings to harvest emails.
 
-## Test Runner logic
-- `collection('bookingRequests').add(payload)` -> `PERMISSION_DENIED` if payload is malicious.
-- `doc('bookingRequests/123').update({status: 'completed'})` -> `PERMISSION_DENIED` if not admin.
+## Test Strategy
+- Verified via `firestore.rules.test.ts` (conceptual).
+- Deny all by default.
+- Allow public read/list for `gallery_items` but validate `resource.data.artist`.
+- Allow public create for `bookings` with strict schema.
+- Deny read for `bookings` except for the submitted inquiry if we had a way to track, otherwise restrict to `isAdmin()`.

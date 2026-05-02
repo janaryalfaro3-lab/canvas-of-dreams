@@ -12,6 +12,18 @@
   }
 }
 
+@layer utilities {
+  @keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+  }
+  .animate-shimmer {
+    background-image: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite linear;
+  }
+}
+
 .italic-text-gradient {
   @apply italic text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600;
 }

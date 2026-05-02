@@ -39,12 +39,18 @@ export default function Booking() {
     
     try {
       // 1. Save to Firestore
-      const path = 'bookingRequests';
+      const path = 'bookings';
       await addDoc(collection(db, path), {
-        ...formData,
+        fullName: formData.fullName,
+        email: formData.email,
+        artist: formData.artist,
+        style: formData.style,
+        vision: formData.vision,
+        preferredDate: formData.preferredDate,
+        preferredTime: formData.preferredTime,
+        referenceImage: formData.referenceImage, // Keep this if needed, but check if rules allow
         status: 'pending',
         createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp()
       });
 
       // 2. Call our API for Email Confirmation
@@ -56,7 +62,7 @@ export default function Booking() {
 
       setSubmitted(true);
     } catch (error) {
-      handleFirestoreError(error, OperationType.WRITE, 'bookingRequests');
+      handleFirestoreError(error, OperationType.WRITE, 'bookings');
     } finally {
       setLoading(false);
     }
@@ -221,7 +227,7 @@ export default function Booking() {
               </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 ml-1">Describe Your Vision</label>
+                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 ml-1">Describe Your Vision (Shop Min. ₱1,200)</label>
                   <textarea 
                     required
                     rows={4} 

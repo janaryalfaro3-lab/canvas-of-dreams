@@ -1,49 +1,45 @@
 {
   "entities": {
-    "bookingRequest": {
-      "title": "Booking Request",
-      "description": "A request for a tattoo appointment consultation.",
+    "GalleryItem": {
+      "title": "Gallery Item",
+      "description": "A tattoo work featured in the gallery",
       "type": "object",
       "properties": {
-        "fullName": { "type": "string", "description": "Client's full name" },
-        "email": { "type": "string", "format": "email", "description": "Client's contact email" },
-        "artist": { "type": "string", "description": "Preferred artist name" },
-        "style": { "type": "string", "description": "Proposed tattoo style" },
-        "vision": { "type": "string", "description": "Description of the tattoo vision" },
-        "preferredDate": { "type": "string", "description": "Desired date for the appointment" },
-        "preferredTime": { "type": "string", "description": "Desired time for the appointment" },
-        "referenceImage": { "type": "string", "description": "Base64 or URL of the reference image" },
-        "status": { "type": "string", "enum": ["pending", "contacted", "scheduled", "completed", "cancelled"], "description": "Current status of the request" },
-        "createdAt": { "type": "string", "format": "date-time", "description": "When the request was created" },
-        "updatedAt": { "type": "string", "format": "date-time", "description": "When the request was last updated" }
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "artist": { "type": "string" },
+        "src": { "type": "string" },
+        "likesCount": { "type": "number", "description": "Number of heart reactions" },
+        "createdAt": { "type": "string", "format": "date-time" }
       },
-      "required": ["fullName", "email", "artist", "style", "vision", "status", "createdAt", "updatedAt"]
+      "required": ["title", "category", "artist", "src"]
     },
-    "blogPost": {
-      "title": "Blog Post",
-      "description": "An article or news update for the tattoo studio journal.",
+    "Booking": {
+      "title": "Booking Inquiry",
+      "description": "A customer booking request",
       "type": "object",
       "properties": {
-        "title": { "type": "string", "description": "Post title" },
-        "excerpt": { "type": "string", "description": "Short summary" },
-        "content": { "type": "string", "description": "Full article content" },
-        "category": { "type": "string", "description": "Topic category" },
-        "authorId": { "type": "string", "description": "UID of the artist author" },
-        "authorName": { "type": "string", "description": "Name of the artist author" },
-        "image": { "type": "string", "description": "Banner image URL" },
-        "date": { "type": "string", "format": "date-time", "description": "Published date" }
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "artist": { "type": "string" },
+        "style": { "type": "string" },
+        "vision": { "type": "string" },
+        "preferredDate": { "type": "string" },
+        "preferredTime": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "completed", "cancelled"] }
       },
-      "required": ["title", "excerpt", "content", "category", "authorId", "authorName", "image", "date"]
+      "required": ["fullName", "email", "artist", "style", "vision", "createdAt", "status"]
     }
   },
   "firestore": {
-    "/bookingRequests/{requestId}": {
-      "schema": "bookingRequest",
-      "description": "Collection of appointment inquiries."
+    "gallery_items": {
+      "schema": "GalleryItem",
+      "description": "Collection of tattoo works"
     },
-    "/blogPosts/{postId}": {
-      "schema": "blogPost",
-      "description": "Collection of journal articles."
+    "bookings": {
+      "schema": "Booking",
+      "description": "Collection of customer booking inquiries"
     }
   }
 }

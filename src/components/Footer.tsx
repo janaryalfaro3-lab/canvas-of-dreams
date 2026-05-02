@@ -3,65 +3,55 @@ import { Instagram, Facebook, Mail, MapPin, Phone, ShieldCheck, CreditCard } fro
 
 export default function Footer() {
   return (
-    <footer className="bg-[#05070a] border-t border-zinc-900 pt-24 pb-12 px-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+    <footer className="bg-black border-t border-white/5 pt-32 pb-12 px-6 relative overflow-hidden">
+       {/* Background Accent */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
+      
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-32">
         
         {/* Column 1: Branding */}
-        <div className="space-y-8">
-          <div className="flex items-center space-x-3">
-             <div className="w-12 h-12 rounded-full overflow-hidden border border-zinc-800">
+        <div className="space-y-10">
+          <div className="flex items-center space-x-4">
+             <div className="w-14 h-14 rounded-full overflow-hidden border border-white/10 p-1">
                 <img 
                   src="https://scontent.fmnl17-5.fna.fbcdn.net/v/t39.30808-6/472457306_122121870752610387_8965074152194860895_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=NU7dA5a41-UQ7kNvwGjqcLi&_nc_oc=AdrdPK2YxeYoUQ87_varUb-Ap6rhyzGDKRrvk6xuFAST5GZiH-34Clccuz2IWCuNBE8&_nc_zt=23&_nc_ht=scontent.fmnl17-5.fna&_nc_gid=kY1Y9yV-LJyNaeGCDm5rNg&_nc_ss=7b2a8&oh=00_Af3avINw-4p1hErGNznFL5tWIeJT8dCNDC7FEvAMqCAqDg&oe=69F65804" 
                   alt="Logo" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-full"
                   referrerPolicy="no-referrer"
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-xl tracking-widest text-white uppercase leading-none">Canvas of Dreams</span>
-                <span className="text-[10px] text-zinc-500 uppercase tracking-[0.3em] mt-1">Tattoo Atelier</span>
+                <span className="font-serif text-2xl tracking-[0.1em] text-white uppercase leading-none">Canvas of Dreams</span>
+                <span className="text-[10px] text-zinc-500 uppercase tracking-[0.4em] mt-2 opacity-60">High Artistry</span>
               </div>
           </div>
-          <p className="text-zinc-400 text-sm leading-relaxed max-w-xs font-light">
-            Premium custom tattoo artistry delivered with absolute precision. We transform skin into a canvas of eternal narratives and masterwork designs.
+          <p className="text-zinc-500 text-base leading-relaxed max-w-xs font-light">
+            Crafting permanent narratives through precision and artistry. A premium sanctuary for self-expression in Central Luzon.
           </p>
-          <div className="flex space-x-4">
-            <a href="#" className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 hover:bg-orange-600 hover:text-white transition-all">
-              <Facebook size={18} />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 hover:bg-orange-600 hover:text-white transition-all">
-              <Instagram size={18} />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 hover:bg-orange-600 hover:text-white transition-all">
-              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.29 0 .57.04.83.11V9.42a6.33 6.33 0 0 0-1.83-.26 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V6.27a8.27 8.27 0 0 0 4.43 1.28V4.1a5.35 5.35 0 0 1-3.66-1.41l-.01.01z"/></svg>
-            </a>
+          <div className="flex space-x-6">
+            {[Instagram, Facebook, Mail].map((Icon, i) => (
+              <a key={i} href="#" className="text-zinc-600 hover:text-orange-500 transition-colors duration-500">
+                <Icon size={20} />
+              </a>
+            ))}
           </div>
         </div>
 
         {/* Column 2: Get in Touch */}
-        <div className="space-y-8">
-          <h3 className="text-white text-xs font-bold uppercase tracking-[0.3em]">Get in Touch</h3>
-          <div className="space-y-6">
-            <div className="flex items-start space-x-4 group">
-              <div className="p-2 bg-zinc-900/50 rounded-lg text-orange-500 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                <Phone size={18} />
-              </div>
-              <span className="text-zinc-400 text-sm mt-1 uppercase font-bold tracking-tighter">0976 442 1242</span>
+        <div className="space-y-10">
+          <h3 className="text-white text-xs font-bold uppercase tracking-[0.4em] opacity-50">Atelier</h3>
+          <div className="space-y-8">
+            <div className="group cursor-pointer">
+              <p className="text-zinc-600 text-[10px] uppercase tracking-[0.2em] mb-2 group-hover:text-orange-500 transition-colors">Direct Contact</p>
+              <p className="text-zinc-300 text-lg font-light tracking-wide italic">0976 442 1242</p>
             </div>
-            <div className="flex items-start space-x-4 group">
-              <div className="p-2 bg-zinc-900/50 rounded-lg text-orange-500 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                <Mail size={18} />
-              </div>
-              <span className="text-zinc-400 text-sm mt-1 font-bold lowercase tracking-tighter">jaesthetic.info@gmail.com</span>
+            <div className="group cursor-pointer">
+              <p className="text-zinc-600 text-[10px] uppercase tracking-[0.2em] mb-2 group-hover:text-orange-500 transition-colors">Inquiries</p>
+              <p className="text-zinc-300 text-lg font-light tracking-wide">jaesthetic.info@gmail.com</p>
             </div>
-            <div className="flex items-start space-x-4 group">
-              <div className="p-2 bg-zinc-900/50 rounded-lg text-orange-500 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                <MapPin size={18} />
-              </div>
-              <div>
-                <p className="text-zinc-400 text-sm font-bold uppercase tracking-tight">Shop: Xevera Ethel St, Mabalacat</p>
-                <p className="text-zinc-600 text-[10px] uppercase font-bold tracking-widest mt-1">Mobile: Pampanga & Tarlac</p>
-              </div>
+            <div className="group cursor-pointer">
+              <p className="text-zinc-600 text-[10px] uppercase tracking-[0.2em] mb-2 group-hover:text-orange-500 transition-colors">Location</p>
+              <p className="text-zinc-300 text-lg font-light tracking-wide">Xevera Ethel St, Mabalacat</p>
             </div>
           </div>
         </div>

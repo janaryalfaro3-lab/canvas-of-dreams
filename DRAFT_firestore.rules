@@ -10,7 +10,7 @@ service cloud.firestore {
     function isSignedIn() { return request.auth != null; }
     function isEmailVerified() { return isSignedIn() && request.auth.token.email_verified == true; }
     function isAdmin() { 
-      return isEmailVerified() && request.auth.token.email == 'jaesthetic.info@gmail.com';
+      return isEmailVerified() && request.auth.token.email == 'johnharry.alfaro@gmail.com';
     }
     
     function isValidId(id) { 
@@ -33,16 +33,22 @@ service cloud.firestore {
           && data.createdAt is timestamp;
       }
 
+      // Public can see works
       allow get, list: if true;
       
+      // Admin can manage works
       allow create: if isAdmin() && isValidGalleryItem(incoming()) && incoming().createdAt == request.time;
       allow delete: if isAdmin();
       
+      // Public can increment likes
       allow update: if (
-        // Action: Like (Public)
-        (incoming().diff(existing()).affectedKeys().hasOnly(['likesCount'])
-         && incoming().likesCount == existing().likesCount + 1)
-        || (isAdmin() && isValidGalleryItem(incoming()))
+        (isSignedIn() || true) // Allow public for now, but better with auth
+        && (
+          // Action: Like
+          (incoming().diff(existing()).affectedKeys().hasOnly(['likesCount'])
+           && incoming().likesCount == existing().likesCount + 1)
+          || (isAdmin() && isValidGalleryItem(incoming()))
+        )
       );
     }
 
@@ -57,15 +63,24 @@ service cloud.firestore {
           && data.style is string
           && data.vision is string && data.vision.size() <= 2000
           && data.createdAt == request.time
-          && (data.status == 'pending');
+          && data.status == 'pending';
       }
 
+      // Only admin can see all bookings
       allow list: if isAdmin();
+      // Users can see their own if we had auth, for now only allow admin to get by ID
       allow get: if isAdmin();
       
+      // Public can submit booking
       allow create: if isValidBooking(incoming()) && isValidId(bookingId);
       
+      // Only admin can update status
       allow update: if isAdmin() && incoming().diff(existing()).affectedKeys().hasOnly(['status']) && incoming().status in ['confirmed', 'completed', 'cancelled'];
+    }
+    
+    // 3. ADMIN LIST (for initial verification)
+    match /admins/{uid} {
+      allow read: if isSignedIn() && request.auth.uid == uid;
     }
   }
 }
