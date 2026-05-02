@@ -375,11 +375,11 @@ export default function Gallery() {
           className="max-w-xl mx-auto mt-12 relative group"
         >
           <div className="absolute inset-0 bg-white/5 blur-2xl rounded-full transition-all group-focus-within:bg-orange-500/10" />
-          <div className="relative flex items-center bg-zinc-950/50 backdrop-blur-md border border-white/10 rounded-full px-6 py-4 focus-within:border-orange-500/50 transition-all">
-            <Search className="text-zinc-500 mr-4" size={20} />
+          <div className="relative flex items-center bg-zinc-950/50 backdrop-blur-md border border-white/10 rounded-full px-6 py-4 focus-within:border-orange-500/50 transition-all shadow-[0_0_20px_0_rgba(249,115,22,0.05)]">
+            <Search className="text-orange-500/50 group-focus-within:text-orange-500 transition-colors" size={20} />
             <input 
               type="text"
-              placeholder="Search by element (e.g. skull, geometric, floral)..."
+              placeholder="Search by element (rose, skull, geometric, etc.)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="bg-transparent border-none outline-none text-white w-full text-sm font-light tracking-wide placeholder:text-zinc-600"

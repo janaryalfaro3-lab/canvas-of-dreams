@@ -134,8 +134,10 @@ export default function Home() {
                 <div className="w-full h-full border-[0.5px] border-white/5 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] opacity-20" />
               </motion.div>
 
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-orange-500/10 blur-[100px] rounded-full" />
-            </motion.div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-orange-500/20 blur-[120px] rounded-full" />
+            <div className="absolute -top-32 -left-32 w-96 h-96 bg-orange-500/10 blur-[150px] rounded-full opacity-50" />
+            <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-orange-500/10 blur-[150px] rounded-full opacity-50" />
+          </motion.div>
 
             <Link 
               to="/booking" 
@@ -189,6 +191,57 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="py-32 px-6 bg-black relative overflow-hidden">
+        {/* Glow Effect for brightness */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-orange-500/5 blur-[120px] rounded-full pointer-events-none" />
+        
+         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+         
+         <div className="max-w-7xl mx-auto">
+           <div className="text-center mb-16 space-y-4">
+             <motion.div
+               initial={{ opacity: 0, scale: 0.9 }}
+               whileInView={{ opacity: 1, scale: 1 }}
+               className="w-px h-16 bg-orange-500 mx-auto mb-8"
+             />
+             <h2 className="text-5xl md:text-7xl font-serif tracking-tighter">Art in Motion</h2>
+             <p className="text-zinc-500 max-w-xl mx-auto font-light leading-relaxed">A cinematic showcase of the precision, soul, and permanence inherent in every stroke of our needles.</p>
+           </div>
+
+           <div className="max-w-4xl mx-auto">
+             <motion.div 
+               initial={{ opacity: 0, y: 30 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true }}
+               className="relative group rounded-3xl overflow-hidden border border-white/5 bg-zinc-900 shadow-2xl aspect-video"
+             >
+               <video
+                 autoPlay
+                 muted
+                 loop
+                 playsInline
+                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+               >
+                 <source src="https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/From%20KlickPin%20CF%20Creative%20Tattoo%20Trends%20_%20Inspiring%20Ideas%20%26%20Designs%20%5BVideo%5D%20_%20Samurai%20tattoo%20Tattoo%20sleeve%20men%20Tattoos%20for%20guys%20-%20Pin-11540542793294778.mp4" type="video/mp4" />
+               </video>
+               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+               <div className="absolute bottom-8 left-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                 <p className="text-[10px] text-orange-500 font-bold uppercase tracking-[0.4em] mb-2">Portfolio Showcase</p>
+                 <h3 className="text-2xl font-serif text-white">Samurai Masterpiece</h3>
+               </div>
+               {/* Playback Progress Overlay */}
+               <div className="absolute bottom-0 left-0 w-full h-1 bg-white/10 overflow-hidden">
+                 <motion.div 
+                   animate={{ x: ["-100%", "0%"] }}
+                   transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                   className="w-full h-full bg-orange-600"
+                 />
+               </div>
+             </motion.div>
+           </div>
+         </div>
       </section>
 
       {/* Artist Teaser */}
@@ -292,16 +345,28 @@ export default function Home() {
       </section>
 
       {/* Brand Pattern Bottom Banner */}
-      <section className="h-64 relative overflow-hidden border-t border-zinc-900">
-        <img 
-          src="https://imgs.search.brave.com/nFOK8eja_io2nJUnbK9mP0MFgQSSLkMVHiZWnYsoRkk/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS12ZWN0b3Iv/dmludGFnZS10YXR0/b29zLWNvbG9yZnVs/LXNlYW1sZXNzLXBh/dHRlcm5fMjI1MDA0/LTE0MDQuanBnP3Nl/bXQ9YWlzX2h5YnJp/ZCZ3PTc0MA" 
-          alt="Bottom pattern" 
-          className="w-full h-full object-cover opacity-10 grayscale"
-        />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="flex items-center space-x-12 opacity-40 grayscale brightness-200">
-             <div className="text-4xl font-serif tracking-widest uppercase">Canvas Artistry</div>
-          </div>
+      <section className="h-[500px] relative overflow-hidden border-t border-zinc-900">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover opacity-30 grayscale hover:grayscale-0 transition-all duration-[2s]"
+        >
+          <source src="https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/202605021600.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-transparent to-zinc-950" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center space-y-4"
+          >
+            <div className="text-4xl md:text-6xl font-serif tracking-widest uppercase opacity-40">Canvas Artistry</div>
+            <div className="w-24 h-px bg-orange-500/50" />
+            <p className="text-zinc-500 text-[10px] uppercase tracking-[0.5em] font-bold">The Journey Continues</p>
+          </motion.div>
         </div>
       </section>
     </div>
