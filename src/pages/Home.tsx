@@ -32,24 +32,28 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
+      <section className="relative h-screen flex items-center justify-center pt-20 px-6 overflow-hidden bg-[#0a0a0a]">
         <motion.div 
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          className="absolute inset-0 z-0 overflow-hidden bg-black"
+          className="absolute inset-0 z-0 overflow-hidden"
         >
           <video
             autoPlay
             muted
             loop
             playsInline
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover brightness-110 contrast-110"
           >
             <source src="https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/202605021041.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-90" />
+          
+          {/* Intense Glow Highlights */}
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-orange-500/15 blur-[150px] rounded-full pointer-events-none" />
+          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-orange-600/10 blur-[150px] rounded-full pointer-events-none" />
         </motion.div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-12">
@@ -193,55 +197,98 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-32 px-6 bg-black relative overflow-hidden">
-        {/* Glow Effect for brightness */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-orange-500/5 blur-[120px] rounded-full pointer-events-none" />
+      {/* Art in Motion (Cinema Reel) */}
+      <section className="py-32 px-6 bg-[#050505] relative overflow-hidden border-y border-white/5">
+        {/* Ambient Glows */}
+        <div className="absolute -top-64 -left-64 w-[800px] h-[800px] bg-orange-500/5 blur-[180px] rounded-full pointer-events-none" />
+        <div className="absolute -bottom-64 -right-64 w-[800px] h-[800px] bg-orange-600/5 blur-[180px] rounded-full pointer-events-none" />
         
-         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-         
-         <div className="max-w-7xl mx-auto">
-           <div className="text-center mb-16 space-y-4">
-             <motion.div
-               initial={{ opacity: 0, scale: 0.9 }}
-               whileInView={{ opacity: 1, scale: 1 }}
-               className="w-px h-16 bg-orange-500 mx-auto mb-8"
-             />
-             <h2 className="text-5xl md:text-7xl font-serif tracking-tighter">Art in Motion</h2>
-             <p className="text-zinc-500 max-w-xl mx-auto font-light leading-relaxed">A cinematic showcase of the precision, soul, and permanence inherent in every stroke of our needles.</p>
-           </div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="flex flex-col md:flex-row items-center justify-between mb-24 gap-8">
+            <div className="max-w-2xl text-center md:text-left space-y-4">
+              <motion.div 
+                initial={{ width: 0 }}
+                whileInView={{ width: "3rem" }}
+                className="h-1 bg-orange-500 mb-6 mx-auto md:mx-0"
+              />
+              <h2 className="text-6xl md:text-8xl font-serif tracking-tighter text-white leading-tight">
+                Cinema <br />
+                <span className="text-orange-500 italic">of Ink</span>
+              </h2>
+              <p className="text-zinc-400 font-light text-xl leading-relaxed">
+                Capturing the soul of every masterpiece through high-definition motion.
+              </p>
+            </div>
+            <div className="hidden md:block">
+               <div className="w-px h-32 bg-gradient-to-b from-orange-500 to-transparent" />
+            </div>
+          </div>
 
-           <div className="max-w-4xl mx-auto">
-             <motion.div 
-               initial={{ opacity: 0, y: 30 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true }}
-               className="relative group rounded-3xl overflow-hidden border border-white/5 bg-zinc-900 shadow-2xl aspect-video"
-             >
-               <video
-                 autoPlay
-                 muted
-                 loop
-                 playsInline
-                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-               >
-                 <source src="https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/From%20KlickPin%20CF%20Creative%20Tattoo%20Trends%20_%20Inspiring%20Ideas%20%26%20Designs%20%5BVideo%5D%20_%20Samurai%20tattoo%20Tattoo%20sleeve%20men%20Tattoos%20for%20guys%20-%20Pin-11540542793294778.mp4" type="video/mp4" />
-               </video>
-               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-               <div className="absolute bottom-8 left-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                 <p className="text-[10px] text-orange-500 font-bold uppercase tracking-[0.4em] mb-2">Portfolio Showcase</p>
-                 <h3 className="text-2xl font-serif text-white">Samurai Masterpiece</h3>
-               </div>
-               {/* Playback Progress Overlay */}
-               <div className="absolute bottom-0 left-0 w-full h-1 bg-white/10 overflow-hidden">
-                 <motion.div 
-                   animate={{ x: ["-100%", "0%"] }}
-                   transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                   className="w-full h-full bg-orange-600"
-                 />
-               </div>
-             </motion.div>
-           </div>
-         </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Samurai Masterpiece (Large) */}
+            <motion.div 
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative group rounded-[3rem] overflow-hidden border border-white/10 bg-zinc-900 shadow-[0_0_50px_-12px_rgba(249,115,22,0.3)]"
+            >
+              <div className="aspect-[16/10] overflow-hidden">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105 brightness-110 contrast-105"
+                >
+                  <source src="https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/From%20KlickPin%20CF%20Creative%20Tattoo%20Trends%20_%20Inspiring%20Ideas%20%26%20Designs%20%5BVideo%5D%20_%20Samurai%20tattoo%20Tattoo%20sleeve%20men%20Tattoos%20for%20guys%20-%20Pin-11540542793294778.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+              <div className="absolute bottom-10 left-10">
+                <span className="bg-orange-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter mb-4 inline-block">Featured</span>
+                <h3 className="text-3xl font-serif text-white">The Samurai Legacy</h3>
+              </div>
+            </motion.div>
+
+            {/* Side Reel - Grid within Grid or Separate Cards */}
+            <div className="space-y-12">
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="relative group rounded-3xl overflow-hidden border border-white/10 bg-zinc-900 aspect-video shadow-xl"
+              >
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover brightness-105 group-hover:scale-105 transition-transform duration-700"
+                >
+                  <source src="https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/202605021600.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                <div className="absolute top-6 left-6">
+                   <div className="flex items-center gap-2 px-3 py-1 bg-black/40 backdrop-blur-md rounded-full border border-white/10">
+                     <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                     <span className="text-[10px] text-white font-bold uppercase tracking-widest">Live Studio Session</span>
+                   </div>
+                </div>
+              </motion.div>
+
+              <div className="p-8 rounded-3xl border border-white/5 bg-zinc-900/50 backdrop-blur-sm space-y-4">
+                <h4 className="text-2xl font-serif text-white">Digital Mastery</h4>
+                <p className="text-zinc-500 font-light leading-relaxed">
+                  Every video is a testament to our dedication. We document the journey from the first trace to the final heal, ensuring your story is captured in every dimension.
+                </p>
+                <button className="text-orange-500 font-bold uppercase tracking-widest text-xs py-2 hover:translate-x-2 transition-transform inline-flex items-center gap-2">
+                  Explore Full Archive <ArrowRight size={14} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Artist Teaser */}
@@ -351,7 +398,7 @@ export default function Home() {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover opacity-30 grayscale hover:grayscale-0 transition-all duration-[2s]"
+          className="w-full h-full object-cover opacity-60 transition-all duration-[2s]"
         >
           <source src="https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/202605021600.mp4" type="video/mp4" />
         </video>
