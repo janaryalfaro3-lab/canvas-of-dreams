@@ -19,6 +19,20 @@ export default function Home() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
+  // Centralized Video Assets
+  const VIDEO_HERO = {
+    local: "/202605021041.mp4",
+    remote: "https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/202605021041.mp4"
+  };
+  const VIDEO_SAMURAI = {
+    local: "/samurai_featured.mp4",
+    remote: "https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/From%20KlickPin%20CF%20Creative%20Tattoo%20Trends%20_%20Inspiring%20Ideas%20%26%20Designs%20%5BVideo%5D%20_%20Samurai%20tattoo%20Tattoo%20sleeve%20men%20Tattoos%20for%20guys%20-%20Pin-11540542793294778.mp4"
+  };
+  const VIDEO_PROCESS = {
+    local: "/202605021600.mp4",
+    remote: "https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/202605021600.mp4"
+  };
+
   return (
     <div className="relative overflow-hidden selection:bg-orange-500/30">
       {/* Global Grain Texture Overlay */}
@@ -44,16 +58,18 @@ export default function Home() {
             muted
             loop
             playsInline
-            className="w-full h-full object-cover brightness-110 contrast-110"
+            className="w-full h-full object-cover brightness-125 contrast-110"
           >
-            <source src="https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/202605021041.mp4" type="video/mp4" />
+            <source src={VIDEO_HERO.local} type="video/mp4" />
+            <source src={VIDEO_HERO.remote} type="video/mp4" />
+            <source src={VIDEO_HERO.remote.replace('/main/', '/main/public/')} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-black/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-90" />
+          <div className="absolute inset-0 bg-black/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80" />
           
-          {/* Intense Glow Highlights */}
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-orange-500/15 blur-[150px] rounded-full pointer-events-none" />
-          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-orange-600/10 blur-[150px] rounded-full pointer-events-none" />
+          {/* Intense Glow Highlights for "Bright" feel */}
+          <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-orange-500/20 blur-[160px] rounded-full pointer-events-none animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-orange-600/15 blur-[160px] rounded-full pointer-events-none" />
         </motion.div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-12">
@@ -238,9 +254,11 @@ export default function Home() {
                   muted
                   loop
                   playsInline
-                  className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105 brightness-110 contrast-105"
+                  className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105 brightness-125 contrast-105"
                 >
-                  <source src="https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/From%20KlickPin%20CF%20Creative%20Tattoo%20Trends%20_%20Inspiring%20Ideas%20%26%20Designs%20%5BVideo%5D%20_%20Samurai%20tattoo%20Tattoo%20sleeve%20men%20Tattoos%20for%20guys%20-%20Pin-11540542793294778.mp4" type="video/mp4" />
+                  <source src={VIDEO_SAMURAI.local} type="video/mp4" />
+                  <source src={VIDEO_SAMURAI.remote} type="video/mp4" />
+                  <source src={VIDEO_SAMURAI.remote.replace('/main/', '/main/public/')} type="video/mp4" />
                 </video>
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
@@ -264,9 +282,11 @@ export default function Home() {
                   muted
                   loop
                   playsInline
-                  className="w-full h-full object-cover brightness-105 group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover brightness-110 group-hover:scale-105 transition-transform duration-700"
                 >
-                  <source src="https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/202605021600.mp4" type="video/mp4" />
+                  <source src={VIDEO_PROCESS.local} type="video/mp4" />
+                  <source src={VIDEO_PROCESS.remote} type="video/mp4" />
+                  <source src={VIDEO_PROCESS.remote.replace('/main/', '/main/public/')} type="video/mp4" />
                 </video>
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
                 <div className="absolute top-6 left-6">
@@ -398,9 +418,11 @@ export default function Home() {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover opacity-60 transition-all duration-[2s]"
+          className="w-full h-full object-cover opacity-70 brightness-110 transition-all duration-[2s]"
         >
-          <source src="https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/202605021600.mp4" type="video/mp4" />
+          <source src={VIDEO_PROCESS.local} type="video/mp4" />
+          <source src={VIDEO_PROCESS.remote} type="video/mp4" />
+          <source src={VIDEO_PROCESS.remote.replace('/main/', '/main/public/')} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-transparent to-zinc-950" />
         <div className="absolute inset-0 flex flex-col items-center justify-center space-y-6">
