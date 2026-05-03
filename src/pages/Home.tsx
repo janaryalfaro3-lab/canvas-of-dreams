@@ -22,11 +22,11 @@ export default function Home() {
   // Centralized Video Assets
   const VIDEO_HERO = {
     local: "/202605021041.mp4",
-    remote: "https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/202605021041.mp4"
+    remote: "https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/public/202605021041.mp4"
   };
   const VIDEO_PROCESS = {
     local: "/202605021600.mp4",
-    remote: "https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/202605021600.mp4"
+    remote: "https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/public/202605021600.mp4"
   };
 
   return (
@@ -58,7 +58,6 @@ export default function Home() {
           >
             <source src={VIDEO_HERO.local} type="video/mp4" />
             <source src={VIDEO_HERO.remote} type="video/mp4" />
-            <source src={VIDEO_HERO.remote.replace('/main/', '/main/public/')} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-black/10" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80" />
@@ -450,7 +449,6 @@ export default function Home() {
         >
           <source src={VIDEO_PROCESS.local} type="video/mp4" />
           <source src={VIDEO_PROCESS.remote} type="video/mp4" />
-          <source src={VIDEO_PROCESS.remote.replace('/main/', '/main/public/')} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-transparent to-zinc-950" />
         <div className="absolute inset-0 flex flex-col items-center justify-center space-y-6">
