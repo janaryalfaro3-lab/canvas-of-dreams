@@ -67,5 +67,22 @@ service cloud.firestore {
       
       allow update: if isAdmin() && incoming().diff(existing()).affectedKeys().hasOnly(['status']) && incoming().status in ['confirmed', 'completed', 'cancelled'];
     }
+
+    // 3. CONSULTATIONS
+    match /consultations/{consultationId} {
+      function isValidConsultation(data) {
+        return data.keys().hasAll(['clientName', 'clientEmail', 'artistId', 'visionDescription', 'createdAt', 'status'])
+          && data.clientName is string && data.clientName.size() <= 100
+          && data.clientEmail is string && data.clientEmail.size() <= 100
+          && data.artistId is string
+          && data.visionDescription is string && data.visionDescription.size() <= 3000
+          && data.createdAt == request.time
+          && data.status == 'new';
+      }
+
+      allow list, get: if isAdmin();
+      allow create: if isValidConsultation(incoming()) && isValidId(consultationId);
+      allow update: if isAdmin() && incoming().diff(existing()).affectedKeys().hasOnly(['status']) && incoming().status in ['reviewed', 'scheduled', 'archived'];
+    }
   }
 }

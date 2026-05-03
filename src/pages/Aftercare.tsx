@@ -110,6 +110,58 @@ export default function Aftercare() {
           </div>
         </div>
       </section>
+
+      {/* Warning Section */}
+      <motion.section 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mt-32 p-10 md:p-16 bg-red-950/20 border border-red-500/10 rounded-[3rem] relative overflow-hidden"
+      >
+        <div className="absolute top-0 right-0 p-12 opacity-5">
+          <ShieldCheck size={200} className="text-red-500" />
+        </div>
+        <div className="max-w-4xl space-y-10 relative z-10">
+          <div className="space-y-4">
+            <h2 className="text-4xl font-serif text-red-500">Signs of Infection</h2>
+            <p className="text-zinc-500 font-light text-lg">
+              While minor redness and swelling are normal for the first 48 hours, be vigilant for the following symptoms:
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div className="space-y-4">
+              <h4 className="text-white font-bold uppercase tracking-widest text-xs flex items-center gap-2">
+                <span className="w-2 h-2 bg-red-500 rounded-full" /> Normal Healing
+              </h4>
+              <ul className="space-y-2 text-sm text-zinc-500 font-light">
+                <li>• Mild redness & slight warmth</li>
+                <li>• Clear or slightly ink-colored weeping</li>
+                <li>• Itching and peeling (like a sunburn)</li>
+                <li>• Localized tenderness</li>
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-red-500 font-bold uppercase tracking-widest text-xs flex items-center gap-2">
+                <span className="w-2 h-2 bg-red-500 rounded-full animate-ping" /> Seek Medical Help If:
+              </h4>
+              <ul className="space-y-2 text-sm text-zinc-400 font-light">
+                <li>• Increasing intense pain or throbbing</li>
+                <li>• Foul-smelling greenish or yellowish discharge</li>
+                <li>• Spreading red streaks from the tattoo area</li>
+                <li>• High fever, chills, or generally feeling unwell</li>
+                <li>• Excessive swelling or hard, painful lumps</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="pt-6 border-t border-red-500/10">
+            <p className="text-xs text-zinc-600 uppercase tracking-[0.2em] italic">
+              *If you experience any of these symptoms, contact your artist immediately and consult a physician. Do not attempt to treat a suspected infection yourself.
+            </p>
+          </div>
+        </div>
+      </motion.section>
     </div>
   );
 }

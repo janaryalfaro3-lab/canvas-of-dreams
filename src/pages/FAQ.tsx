@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronDown, HelpCircle, Scissors, ShieldCheck, HeartPulse, CreditCard } from 'lucide-react';
+import { ChevronDown, HelpCircle, Scissors, ShieldCheck, HeartPulse, CreditCard, Zap } from 'lucide-react';
 
 interface FAQItem {
   question: string;
@@ -16,6 +16,11 @@ const faqs: FAQItem[] = [
   },
   {
     category: "Booking",
+    question: "Do you offer consultations before booking?",
+    answer: "Absolutely. We offer dedicated 'Consultation' appointments where you can discuss your vision with an artist, explore placement options, and get a precise quote. You can book a consultation through our website form."
+  },
+  {
+    category: "Booking",
     question: "Is a deposit required?",
     answer: "Yes, a non-refundable deposit is required to secure your appointment. This deposit goes towards the final price of your tattoo. If you need to reschedule, we require at least 48 hours' notice to transfer your deposit to a new date."
   },
@@ -23,6 +28,11 @@ const faqs: FAQItem[] = [
     category: "Pricing",
     question: "How much will my tattoo cost?",
     answer: "Pricing depends on size, complexity, and detail. Our shop minimum is ₱1,200. For larger pieces, artists typically charge by the hour. We can provide a ballpark estimate after reviewing your concept."
+  },
+  {
+    category: "Services",
+    question: "Do you offer tattoo removal?",
+    answer: "Yes! We use advanced Pico-Laser technology for safe and effective tattoo removal. Sessions start at ₱1,500. We also offer multi-session packages (e.g., 5+1 free) for complete removal or fading for cover-ups."
   },
   {
     category: "Preparation",
@@ -49,6 +59,7 @@ const faqs: FAQItem[] = [
 const categories = [
   { name: "Booking", icon: <CreditCard size={18} /> },
   { name: "Pricing", icon: <Scissors size={18} /> },
+  { name: "Services", icon: <Zap size={18} /> },
   { name: "Preparation", icon: <ShieldCheck size={18} /> },
   { name: "Aftercare", icon: <HeartPulse size={18} /> },
   { name: "Policies", icon: <HelpCircle size={18} /> },
@@ -160,7 +171,7 @@ export default function FAQ() {
         </p>
         <div className="flex justify-center">
           <a 
-            href="/booking" 
+            href="/consultation" 
             className="px-10 py-4 bg-white text-black font-bold uppercase tracking-widest rounded-full hover:bg-black hover:text-white transition-all transform hover:scale-105"
           >
             Ask an Artist

@@ -9,6 +9,7 @@ import Gallery from './pages/Gallery';
 import Booking from './pages/Booking';
 import Aftercare from './pages/Aftercare';
 import FAQ from './pages/FAQ';
+import Consultation from './pages/Consultation';
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
               <Route path="/aftercare" element={<Aftercare />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/booking" element={<Booking />} />
+              <Route path="/consultation" element={<Consultation />} />
             </Routes>
           </AnimatePresence>
         </main>

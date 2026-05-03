@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
-import { ArrowRight, Star, ShieldCheck, Palette } from 'lucide-react';
+import { ArrowRight, Star, ShieldCheck, Palette, Zap, Eraser, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Home() {
@@ -23,10 +23,6 @@ export default function Home() {
   const VIDEO_HERO = {
     local: "/202605021041.mp4",
     remote: "https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/202605021041.mp4"
-  };
-  const VIDEO_SAMURAI = {
-    local: "/samurai_featured.mp4",
-    remote: "https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/From%20KlickPin%20CF%20Creative%20Tattoo%20Trends%20_%20Inspiring%20Ideas%20%26%20Designs%20%5BVideo%5D%20_%20Samurai%20tattoo%20Tattoo%20sleeve%20men%20Tattoos%20for%20guys%20-%20Pin-11540542793294778.mp4"
   };
   const VIDEO_PROCESS = {
     local: "/202605021600.mp4",
@@ -186,6 +182,10 @@ export default function Home() {
       {/* Philosophy Section */}
       <section className="py-32 px-6 bg-zinc-950 relative">
         <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-24 space-y-4">
+            <h2 className="text-5xl md:text-7xl font-serif">Our Philosophy</h2>
+            <p className="text-zinc-500 max-w-2xl mx-auto font-light">The pillars that define the Canvas of Dreams experience.</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-20">
             {[
               { icon: Palette, title: "Artistic Vision", text: "Every tattoo is a collaboration. Our artists spend time understanding your vision before a single needle touches the skin." },
@@ -213,100 +213,128 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Art in Motion (Cinema Reel) */}
-      <section className="py-32 px-6 bg-[#050505] relative overflow-hidden border-y border-white/5">
-        {/* Ambient Glows */}
-        <div className="absolute -top-64 -left-64 w-[800px] h-[800px] bg-orange-500/5 blur-[180px] rounded-full pointer-events-none" />
-        <div className="absolute -bottom-64 -right-64 w-[800px] h-[800px] bg-orange-600/5 blur-[180px] rounded-full pointer-events-none" />
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row items-center justify-between mb-24 gap-8">
-            <div className="max-w-2xl text-center md:text-left space-y-4">
-              <motion.div 
-                initial={{ width: 0 }}
-                whileInView={{ width: "3rem" }}
-                className="h-1 bg-orange-500 mb-6 mx-auto md:mx-0"
-              />
-              <h2 className="text-6xl md:text-8xl font-serif tracking-tighter text-white leading-tight">
-                Cinema <br />
-                <span className="text-orange-500 italic">of Ink</span>
+      {/* Specialization Section - Tattoo Removal & Packages */}
+      <section className="py-32 px-6 bg-[#080808] border-y border-white/5 relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-20 items-start">
+            <div className="lg:w-1/3 space-y-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-500/10 border border-orange-500/20 rounded-full">
+                <Sparkles size={12} className="text-orange-500" />
+                <span className="text-[10px] font-bold text-orange-500 uppercase tracking-[0.2em]">Pico-Laser Center</span>
+              </div>
+              <h2 className="text-5xl md:text-6xl font-serif text-white leading-tight">
+                Clear Your <br/>
+                <span className="italic text-orange-500">Canvas</span>
               </h2>
-              <p className="text-zinc-400 font-light text-xl leading-relaxed">
-                Capturing the soul of every masterpiece through high-definition motion.
+              <p className="text-zinc-500 font-light text-lg pb-4">
+                Regret is temporary; our laser technology is permanent. We offer the most advanced Pico-Laser removal in Central Luzon, designed specifically for diverse skin types.
               </p>
+              <Link to="/consultation" className="inline-flex items-center gap-3 text-white font-bold uppercase tracking-widest text-xs group">
+                Free Consultation <ArrowRight size={14} className="text-orange-500 group-hover:translate-x-2 transition-transform" />
+              </Link>
             </div>
-            <div className="hidden md:block">
-               <div className="w-px h-32 bg-gradient-to-b from-orange-500 to-transparent" />
-            </div>
-          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Samurai Masterpiece (Large) */}
-            <motion.div 
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="relative group rounded-[3rem] overflow-hidden border border-white/10 bg-zinc-900 shadow-[0_0_50px_-12px_rgba(249,115,22,0.3)]"
-            >
-              <div className="aspect-[16/10] overflow-hidden">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105 brightness-125 contrast-105"
-                >
-                  <source src={VIDEO_SAMURAI.local} type="video/mp4" />
-                  <source src={VIDEO_SAMURAI.remote} type="video/mp4" />
-                  <source src={VIDEO_SAMURAI.remote.replace('/main/', '/main/public/')} type="video/mp4" />
-                </video>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-              <div className="absolute bottom-10 left-10">
-                <span className="bg-orange-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter mb-4 inline-block">Featured</span>
-                <h3 className="text-3xl font-serif text-white">The Samurai Legacy</h3>
-              </div>
-            </motion.div>
-
-            {/* Side Reel - Grid within Grid or Separate Cards */}
-            <div className="space-y-12">
+            <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Package 1 */}
               <motion.div 
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="relative group rounded-3xl overflow-hidden border border-white/10 bg-zinc-900 aspect-video shadow-xl"
+                whileHover={{ y: -5 }}
+                className="p-10 rounded-[2rem] bg-zinc-950 border border-zinc-900 space-y-6 relative overflow-hidden group"
               >
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover brightness-110 group-hover:scale-105 transition-transform duration-700"
-                >
-                  <source src={VIDEO_PROCESS.local} type="video/mp4" />
-                  <source src={VIDEO_PROCESS.remote} type="video/mp4" />
-                  <source src={VIDEO_PROCESS.remote.replace('/main/', '/main/public/')} type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
-                <div className="absolute top-6 left-6">
-                   <div className="flex items-center gap-2 px-3 py-1 bg-black/40 backdrop-blur-md rounded-full border border-white/10">
-                     <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                     <span className="text-[10px] text-white font-bold uppercase tracking-widest">Live Studio Session</span>
-                   </div>
+                <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <Zap size={80} className="text-orange-500" />
                 </div>
+                <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center border border-orange-500/20">
+                  <Zap size={20} className="text-orange-500" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-bold text-white uppercase tracking-wider">Flash Session</h3>
+                  <p className="text-3xl font-serif italic text-orange-500">starts at ₱1,500</p>
+                </div>
+                <ul className="space-y-3 text-zinc-500 font-light text-sm">
+                  <li className="flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-orange-500" />
+                    Ideal for small tattoos (2x2)
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-orange-500" />
+                    Pico-Laser Technology
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-orange-500" />
+                    Minimal downtime
+                  </li>
+                </ul>
               </motion.div>
 
-              <div className="p-8 rounded-3xl border border-white/5 bg-zinc-900/50 backdrop-blur-sm space-y-4">
-                <h4 className="text-2xl font-serif text-white">Digital Mastery</h4>
-                <p className="text-zinc-500 font-light leading-relaxed">
-                  Every video is a testament to our dedication. We document the journey from the first trace to the final heal, ensuring your story is captured in every dimension.
-                </p>
-                <button className="text-orange-500 font-bold uppercase tracking-widest text-xs py-2 hover:translate-x-2 transition-transform inline-flex items-center gap-2">
-                  Explore Full Archive <ArrowRight size={14} />
-                </button>
-              </div>
+              {/* Package 2 */}
+              <motion.div 
+                whileHover={{ y: -5 }}
+                className="p-10 rounded-[2rem] bg-zinc-950 border border-orange-500/30 space-y-6 relative overflow-hidden group shadow-[0_0_40px_-15px_rgba(249,115,22,0.2)]"
+              >
+                <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-[10px] font-bold px-4 py-1.5 rounded-bl-xl uppercase">Best Value</div>
+                <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center border border-orange-500/20">
+                  <Eraser size={20} className="text-orange-500" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-bold text-white uppercase tracking-wider">Clear Canvas Bundle</h3>
+                  <p className="text-3xl font-serif italic text-orange-500">₱7,500 <span className="text-xs text-zinc-600 line-through italic ml-2">₱9,000</span></p>
+                </div>
+                <ul className="space-y-3 text-zinc-500 font-light text-sm">
+                  <li className="flex items-center gap-2 text-zinc-300">
+                    <div className="w-1 h-1 rounded-full bg-orange-500" />
+                    <strong>5 Sessions + 1 FREE</strong>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-orange-500" />
+                    Advanced ink shattering
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-orange-500" />
+                    Personalized healing plan
+                  </li>
+                </ul>
+              </motion.div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Inviting Intermission - Replaces Cinema Reel */}
+      <section className="py-40 px-6 bg-[#0a0a0a] relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[600px] bg-orange-500/5 blur-[120px] rounded-full" />
+        
+        <div className="max-w-5xl mx-auto text-center space-y-12 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-full"
+          >
+            <ShieldCheck size={14} className="text-orange-500" />
+            <span className="text-[10px] font-bold text-white uppercase tracking-[0.2em]">Where Art Meets Trust</span>
+          </motion.div>
+          
+          <h2 className="text-5xl md:text-8xl font-serif text-white leading-tight">
+            Every ink has a <br />
+            <span className="italic text-orange-500 font-medium">Soul.</span>
+          </h2>
+          
+          <p className="text-zinc-500 text-xl font-light leading-relaxed max-w-3xl mx-auto">
+            At Canvas of Dreams, we believe a tattoo is more than just pigment on skin. It's a dialogue between your history and our artistry. We've created a space that feels like home, where your vision is honored and your safety is paramount.
+          </p>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 pt-8">
+            {[
+              { label: 'Studio Minimum', val: '₱1,200' },
+              { label: 'Artists', val: '04 Masters' },
+              { label: 'Experience', val: '12+ Years' },
+              { label: 'Location', val: 'Tarlac, PH' }
+            ].map((stat, i) => (
+              <div key={i} className="p-6 rounded-2xl bg-zinc-900/50 border border-white/5 space-y-1">
+                <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest leading-none">{stat.label}</p>
+                <p className="text-lg font-serif text-white">{stat.val}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -403,7 +431,7 @@ export default function Home() {
             <h2 className="text-5xl md:text-7xl font-serif italic tracking-tight">Ready to tell your story?</h2>
             <p className="text-zinc-500 text-lg md:text-xl font-light">Join our waitlist for a custom consultation with one of our artists.</p>
             <div className="pt-8">
-              <Link to="/booking" className="inline-block px-12 py-6 bg-orange-600 text-white font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+              <Link to="/consultation" className="inline-block px-12 py-6 bg-orange-600 text-white font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">
                 Request a Consultation
               </Link>
             </div>

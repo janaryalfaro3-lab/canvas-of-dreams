@@ -26,6 +26,7 @@ export default function Navbar() {
     { name: 'Gallery', path: '/gallery' },
     { name: 'Aftercare', path: '/aftercare' },
     { name: 'FAQ', path: '/faq' },
+    { name: 'Consult', path: '/consultation' },
     { name: 'Booking', path: '/booking' },
   ];
 
