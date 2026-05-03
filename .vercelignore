@@ -1,0 +1,11 @@
+node_modules
+dist
+.env
+.env.local
+.git
+.gitignore
+README.md
+DRAFT_firestore.rules
+security_spec.md
+firebase-blueprint.json
+firestore.rules.test.ts
