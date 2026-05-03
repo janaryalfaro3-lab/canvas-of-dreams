@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { createServer as createViteServer } from 'vite';
 
@@ -14,6 +15,22 @@ async function startServer() {
 
   app.use(cors());
   app.use(express.json({ limit: '10mb' }));
+
+  app.use((req, res, next) => {
+    // Quiet log for health checks, loud for others
+    if (req.url !== '/api/health') {
+      console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    }
+    next();
+  });
+
+  app.get('/api/health', (req, res) => {
+    res.json({ 
+      status: 'ok', 
+      environment: process.env.NODE_ENV,
+      timestamp: new Date().toISOString()
+    });
+  });
 
   // API Route for Booking with Email Confirmation
   app.post('/api/booking', async (req, res) => {
@@ -67,7 +84,6 @@ async function startServer() {
         `,
       };
 
-      // In a real app, you'd await this. For demo purposes if no SMTP is set, we'll log it.
       if (process.env.SMTP_HOST) {
         await transporter.sendMail(mailOptions);
         console.log(`Confirmation email sent to ${email}`);
@@ -84,17 +100,33 @@ async function startServer() {
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== 'production') {
+    console.log('Starting Vite in development mode...');
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
+    console.log('Serving static files from dist in production mode...');
+    const distPath = path.resolve(__dirname, 'dist');
+    const indexPath = path.join(distPath, 'index.html');
+    
+    if (fs.existsSync(distPath)) {
+      app.use(express.static(distPath));
+      app.get('*', (req, res) => {
+        if (fs.existsSync(indexPath)) {
+          res.sendFile(indexPath);
+        } else {
+          res.status(404).send('index.html not found in dist. Please run npm run build.');
+        }
+      });
+    } else {
+      console.error('ERROR: dist folder not found. Falling back to project root.');
+      app.use(express.static(process.cwd()));
+      app.get('*', (req, res) => {
+        res.sendFile(path.join(process.cwd(), 'index.html'));
+      });
+    }
   }
 
   app.listen(PORT, '0.0.0.0', () => {
