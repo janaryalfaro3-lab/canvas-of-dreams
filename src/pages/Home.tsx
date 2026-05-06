@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
 import { ArrowRight, Star, ShieldCheck, Palette, Zap, Eraser, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import PageTransition from '../components/PageTransition';
 
 export default function Home() {
   const mouseX = useMotionValue(0);
@@ -30,7 +31,8 @@ export default function Home() {
   };
 
   return (
-    <div className="relative overflow-hidden selection:bg-orange-500/30">
+    <PageTransition>
+      <div className="relative overflow-hidden selection:bg-orange-500/30">
       {/* Global Grain Texture Overlay */}
       <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03] mix-blend-overlay">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -465,5 +467,6 @@ export default function Home() {
         </div>
       </section>
     </div>
+    </PageTransition>
   );
 }

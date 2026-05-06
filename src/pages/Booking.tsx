@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Mail, Phone, MapPin, Instagram, Facebook, Clock, Send, Loader2, CheckCircle2 } from 'lucide-react';
+import PageTransition from '../components/PageTransition';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../lib/firebase';
 
@@ -69,7 +70,8 @@ export default function Booking() {
   };
 
   return (
-    <div className="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+    <PageTransition>
+      <div className="pt-32 pb-24 px-6 max-w-7xl mx-auto">
       <header className="mb-20 text-center space-y-6">
         <h1 className="text-6xl md:text-8xl font-serif tracking-tighter">Claim Your <span className="italic italic-text-gradient">Space</span></h1>
         <p className="text-zinc-500 max-w-xl mx-auto font-light leading-relaxed">
@@ -284,6 +286,7 @@ export default function Booking() {
         </motion.div>
       </div>
     </div>
+    </PageTransition>
   );
 }
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Heart, X, ZoomIn, Info, Database, Sparkles, Loader2, Search, Tag } from 'lucide-react';
+import PageTransition from '../components/PageTransition';
 import { 
   collection, 
   onSnapshot, 
@@ -336,7 +337,8 @@ export default function Gallery() {
   };
 
   return (
-    <div className="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+    <PageTransition>
+      <div className="pt-32 pb-24 px-6 max-w-7xl mx-auto">
       <header className="mb-24 text-center space-y-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -707,5 +709,6 @@ export default function Gallery() {
         )}
       </AnimatePresence>
     </div>
+    </PageTransition>
   );
 }

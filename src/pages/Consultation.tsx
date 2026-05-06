@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Calendar, Clock, User, MessageSquare, Upload, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import PageTransition from '../components/PageTransition';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../lib/firebase';
 
@@ -46,11 +47,7 @@ export default function Consultation() {
 
   if (isSuccess) {
     return (
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="min-h-screen pt-32 px-6 flex items-center justify-center"
-      >
+      <PageTransition className="min-h-screen pt-32 px-6 flex items-center justify-center">
         <div className="max-w-md w-full text-center space-y-8 p-12 rounded-[2.5rem] bg-zinc-950 border border-orange-500/20 shadow-2xl shadow-orange-500/5">
           <div className="w-20 h-20 bg-orange-500/10 rounded-full flex items-center justify-center mx-auto border border-orange-500/20">
             <ShieldCheck className="text-orange-500" size={40} />
@@ -68,17 +65,12 @@ export default function Consultation() {
             Submit Another Vision
           </button>
         </div>
-      </motion.div>
+      </PageTransition>
     );
   }
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="pt-32 pb-40 px-6 max-w-7xl mx-auto"
-    >
+    <PageTransition className="pt-32 pb-40 px-6 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
         {/* Left Side: Context */}
         <div className="space-y-12">
@@ -262,6 +254,6 @@ export default function Consultation() {
           </form>
         </div>
       </div>
-    </motion.div>
+    </PageTransition>
   );
 }

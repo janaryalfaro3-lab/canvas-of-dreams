@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { ShieldCheck, Droplets, Sun, Wind, CheckCircle2 } from 'lucide-react';
+import PageTransition from '../components/PageTransition';
 
 const guidelines = [
   {
@@ -43,7 +44,8 @@ const products = [
 
 export default function Aftercare() {
   return (
-    <div className="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+    <PageTransition>
+      <div className="pt-32 pb-24 px-6 max-w-7xl mx-auto">
       <header className="mb-20 text-center space-y-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -163,5 +165,6 @@ export default function Aftercare() {
         </div>
       </motion.section>
     </div>
+    </PageTransition>
   );
 }

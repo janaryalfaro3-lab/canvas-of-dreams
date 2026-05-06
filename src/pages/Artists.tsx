@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Instagram, Facebook } from 'lucide-react';
+import PageTransition from '../components/PageTransition';
 
 const artists = [
   {
@@ -32,7 +33,8 @@ const artists = [
 
 export default function Artists() {
   return (
-    <div className="relative">
+    <PageTransition>
+      <div className="relative">
       {/* Background Video for Artists Page */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-black">
         <video
@@ -170,5 +172,6 @@ export default function Artists() {
         </div>
       </div>
     </div>
+    </PageTransition>
   );
 }

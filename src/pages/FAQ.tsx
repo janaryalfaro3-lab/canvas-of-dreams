@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown, HelpCircle, Scissors, ShieldCheck, HeartPulse, CreditCard, Zap } from 'lucide-react';
+import PageTransition from '../components/PageTransition';
 
 interface FAQItem {
   question: string;
@@ -69,7 +70,8 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="pt-32 pb-24 px-6 max-w-4xl mx-auto">
+    <PageTransition>
+      <div className="pt-32 pb-24 px-6 max-w-4xl mx-auto">
       <header className="mb-16 text-center space-y-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -179,5 +181,6 @@ export default function FAQ() {
         </div>
       </motion.div>
     </div>
+    </PageTransition>
   );
 }

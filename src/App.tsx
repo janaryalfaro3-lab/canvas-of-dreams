@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'motion/react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import InkRain from './components/InkRain';
@@ -10,6 +10,24 @@ import Booking from './pages/Booking';
 import Aftercare from './pages/Aftercare';
 import FAQ from './pages/FAQ';
 import Consultation from './pages/Consultation';
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Home />} />
+        <Route path="/artists" element={<Artists />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/aftercare" element={<Aftercare />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/consultation" element={<Consultation />} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
 
 export default function App() {
   return (
@@ -28,17 +46,7 @@ export default function App() {
         <Navbar />
         <InkRain />
         <main className="relative z-10">
-          <AnimatePresence mode="wait">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/artists" element={<Artists />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/aftercare" element={<Aftercare />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/booking" element={<Booking />} />
-              <Route path="/consultation" element={<Consultation />} />
-            </Routes>
-          </AnimatePresence>
+          <AnimatedRoutes />
         </main>
         <Footer />
       </div>
