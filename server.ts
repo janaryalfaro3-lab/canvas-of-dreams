@@ -134,4 +134,5 @@ async function startServer() {
   });
 }
 
-startServer();
+startServer(); export const LOGO_URL = "/logo.jpg";
+export const FALLBACK_LOGO_URL = "https://scontent.fmnl17-5.fna.fbcdn.net/v/t39.30808-6/472457306_122121870752610387_8965074152194860895_n.jpg?...";
