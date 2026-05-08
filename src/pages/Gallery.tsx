@@ -466,18 +466,18 @@ export default function Gallery() {
                 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 whileHover={{ 
-                  y: -10,
-                  scale: 1.01,
-                  boxShadow: "0 20px 40px -10px rgba(0, 0, 0, 0.5)"
+                  y: -8,
+                  scale: 1.02,
+                  boxShadow: "0 30px 60px -12px rgba(0, 0, 0, 0.6), 0 18px 36px -18px rgba(0, 0, 0, 0.7)"
                 }}
-                className="group relative aspect-[3/4] bg-zinc-900 rounded-[2rem] overflow-hidden shadow-xl transition-all duration-700 cursor-zoom-in border border-zinc-800 hover:border-zinc-700"
+                className="group relative aspect-[3/4] bg-zinc-900 rounded-[2rem] overflow-hidden shadow-xl transition-all duration-700 cursor-zoom-in border border-zinc-800 hover:border-zinc-700 hover:z-10"
                 onClick={() => setSelectedImage(item)}
               >
                 <div className="relative w-full h-full overflow-hidden">
                   <ImageWithPlaceholder
                     src={item.src} 
                     alt={item.title} 
-                    className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
                   />
                 </div>
                 
@@ -556,30 +556,41 @@ export default function Gallery() {
                             {/* Main Floating Heart */}
                             <motion.div
                               initial={{ opacity: 1, y: 0, scale: 1 }}
-                              animate={{ opacity: 0, y: -60, scale: 2, rotate: [0, 15, -15, 0] }}
+                              animate={{ opacity: 0, y: -70, scale: 2.5, rotate: [0, 20, -20, 0] }}
                               exit={{ opacity: 0 }}
                               className="absolute -top-4 text-red-500 pointer-events-none z-10"
                             >
                               <Heart size={20} fill="currentColor" />
                             </motion.div>
-                            {/* Tiny Bursts */}
-                            {[...Array(4)].map((_, i) => (
+                            {/* Complex Burst Flourish */}
+                            {[...Array(8)].map((_, i) => (
                               <motion.div
                                 key={i}
-                                initial={{ opacity: 1, x: 0, y: 0, scale: 0.5 }}
+                                initial={{ opacity: 1, x: 0, y: 0, scale: 0.2 }}
                                 animate={{ 
-                                  opacity: 0, 
-                                  x: (i % 2 === 0 ? 1 : -1) * (Math.random() * 30 + 10), 
-                                  y: -(Math.random() * 40 + 20),
-                                  scale: 1,
-                                  rotate: Math.random() * 90 
+                                  opacity: [1, 1, 0], 
+                                  x: Math.cos(i * (Math.PI / 4)) * (Math.random() * 50 + 30), 
+                                  y: Math.sin(i * (Math.PI / 4)) * (Math.random() * 50 + 30) - 20,
+                                  scale: [0.2, 1.2, 0],
+                                  rotate: Math.random() * 360 
                                 }}
-                                transition={{ duration: 0.6, ease: "easeOut" }}
-                                className="absolute top-2 text-red-400 pointer-events-none z-0"
+                                transition={{ duration: 0.8, ease: "easeOut" }}
+                                className="absolute top-2 pointer-events-none z-0"
                               >
-                                <Heart size={8} fill="currentColor" />
+                                {i % 2 === 0 ? (
+                                  <Heart size={Math.random() * 8 + 4} className="text-red-400" fill="currentColor" />
+                                ) : (
+                                  <Sparkles size={Math.random() * 10 + 6} className="text-orange-400" fill="currentColor" />
+                                )}
                               </motion.div>
                             ))}
+                            {/* Outer Pulse Wave */}
+                            <motion.div
+                              initial={{ opacity: 0.5, scale: 0.8 }}
+                              animate={{ opacity: 0, scale: 2.5 }}
+                              transition={{ duration: 0.5 }}
+                              className="absolute inset-0 rounded-full bg-red-500/30 pointer-events-none"
+                            />
                           </>
                         )}
                       </AnimatePresence>

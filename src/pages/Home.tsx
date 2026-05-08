@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { motion, useMotionValue, useSpring } from 'motion/react';
-import { ArrowRight, Star, ShieldCheck, Palette, Zap, Eraser, Sparkles } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { motion, useMotionValue, useSpring, AnimatePresence } from 'motion/react';
+import { ArrowRight, Star, ShieldCheck, Palette, Zap, Eraser, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageTransition from '../components/PageTransition';
 import { VIDEO_HERO, VIDEO_PROCESS } from '../constants';
@@ -11,6 +11,35 @@ export default function Home() {
   
   const springX = useSpring(mouseX, { stiffness: 100, damping: 30 });
   const springY = useSpring(mouseY, { stiffness: 100, damping: 30 });
+
+  const testimonials = [
+    { name: "Roberto G. de Leon", role: "Business Owner", text: "Sobra akong bilib sa detail ng tattoo ko. I wanted something that represents my business journey, and they delivered perfectly. Professional ang environment at napakalinis. Satisfied talaga ako." },
+    { name: "Arch. Clariss B. Mendoza", role: "Architect", text: "As an architect, I'm very particular with lines and symmetry. Canvas of Dreams surpassed my expectations. Very minimal yet very powerful yung execution. Hands down to the artist." },
+    { name: "Atty. Ferdinand P. Santos", role: "Legal Consultant", text: "I was hesitant at first because of my profession, but the artists here are very respectful of my preference for discreet pieces. Subtle details but with great meaning. Sulit ang travel." },
+    { name: "Dr. Elizabeth L. Reyes", role: "Medical Professional", text: "I had a laser removal for an old mistake. Smooth ang process at hindi kasing sakit ng inaakala ko. Nakita ko yung progress after just two sessions. High-end equipment talaga." },
+    { name: "Engr. Antonio V. Cruz", role: "Project Manager", text: "The consultation was top-notch. Hindi lang sila basta tattoo shop, they really care about the story behind the ink. Nag-suggest sila ng improvements sa design ko na lalong nagpaganda." },
+    { name: "Prof. Remedios M. Tolentino", role: "Academic Specialist", text: "Beautiful experience for a first-timer like me. They explained everything clearly—from the stencil until the aftercare. Very comforting and the studio vibes are just right." }
+  ];
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const nextSlide = useCallback(() => {
+    setDirection(1);
+    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  }, [testimonials.length]);
+
+  const prevSlide = useCallback(() => {
+    setDirection(-1);
+    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  }, [testimonials.length]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -222,47 +251,105 @@ export default function Home() {
             <p className="text-zinc-500 max-w-2xl mx-auto font-light italic">"Tunay na kwento mula sa mga taong nagtiwala sa aming sining."</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { name: "Marites Dimagiba", role: "Collector", text: "The best talaga ang Canvas of Dreams! Ang linis ng gawa at sobrang bait ng artists. Definitely babalik ako for my next ink!" },
-              { name: "Jun-Jun Santos", role: "Regular Client", text: "Sobrang professional kumuha ng Polynesian designs. Swabe ang kamay ni artist, hindi masyadong masakit. Sulit bawat sentimo!" },
-              { name: "Maria Clara", role: "First-timer", text: "First time ko magpa-tattoo and super kinabahan ako, pero dahil sa chill vibes ng studio, naging kampante ako. Minimalist lines are perfect!" },
-              { name: "Cardo Dalisay", role: "Removal Client", text: "Solid ang Pico-Laser removal dito. Akala ko hindi na matatanggal yung luma kong tattoo, pero after a few sessions, halos wala na. Recommended!" },
-              { name: "Baby Girl", role: "Art Enthusiast", text: "Grabe ang ganda ng vision ko na tinranslate nila into art. Ang talino ng concept designs, unique talaga bawat piraso." },
-              { name: "Lolo Pepe", role: "Local Legend", text: "Kwentuhan habang tinatattooan, ramdam mo yung passion nila. Hindi lang basta business, talagang art ang priority dito sa studio." }
-            ].map((testimonial, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="p-10 rounded-[2.5rem] bg-zinc-950 border border-zinc-900 flex flex-col justify-between hover:border-orange-500/30 transition-all duration-500 group relative"
+          <div className="relative max-w-4xl mx-auto">
+            {/* Navigation Buttons */}
+            <div className="absolute -left-4 md:-left-20 top-1/2 -translate-y-1/2 z-20">
+              <button 
+                onClick={prevSlide}
+                className="p-4 rounded-full bg-zinc-900/50 border border-white/5 text-zinc-500 hover:text-orange-500 hover:border-orange-500/50 transition-all duration-300 backdrop-blur-md"
               >
-                <div className="absolute top-8 right-10 text-orange-500/20 group-hover:text-orange-500/40 transition-colors">
-                  <Star size={40} />
-                </div>
-                <div className="space-y-4">
-                  <div className="flex space-x-1">
-                    {[...Array(5)].map((_, index) => (
-                      <Star key={index} size={12} className="fill-orange-500 text-orange-500" />
-                    ))}
+                <ChevronLeft size={24} />
+              </button>
+            </div>
+            <div className="absolute -right-4 md:-right-20 top-1/2 -translate-y-1/2 z-20">
+              <button 
+                onClick={nextSlide}
+                className="p-4 rounded-full bg-zinc-900/50 border border-white/5 text-zinc-500 hover:text-orange-500 hover:border-orange-500/50 transition-all duration-300 backdrop-blur-md"
+              >
+                <ChevronRight size={24} />
+              </button>
+            </div>
+
+            {/* Testimonial Card */}
+            <div className="relative h-[450px] md:h-[400px] overflow-hidden">
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={activeIndex}
+                  custom={direction}
+                  variants={{
+                    enter: (direction: number) => ({
+                      x: direction > 0 ? 100 : -100,
+                      opacity: 0,
+                      scale: 0.95
+                    }),
+                    center: {
+                      zIndex: 1,
+                      x: 0,
+                      opacity: 1,
+                      scale: 1
+                    },
+                    exit: (direction: number) => ({
+                      zIndex: 0,
+                      x: direction < 0 ? 100 : -100,
+                      opacity: 0,
+                      scale: 0.95
+                    })
+                  }}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{
+                    x: { type: "spring", stiffness: 300, damping: 30 },
+                    opacity: { duration: 0.4 },
+                    scale: { duration: 0.4 }
+                  }}
+                  className="absolute inset-0 p-8 md:p-16 rounded-[3rem] bg-zinc-950 border border-zinc-900 flex flex-col justify-between group"
+                >
+                  <div className="absolute top-10 right-10 text-orange-500/10 group-hover:text-orange-500/20 transition-colors pointer-events-none">
+                    <Star size={120} />
                   </div>
-                  <p className="text-zinc-400 font-light leading-relaxed text-lg italic">
-                    "{testimonial.text}"
-                  </p>
-                </div>
-                <div className="mt-8 pt-8 border-t border-white/5 flex items-center space-x-4">
-                  <div className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-orange-500 font-serif text-xl">
-                    {testimonial.name.charAt(0)}
+
+                  <div className="space-y-8 relative z-10">
+                    <div className="flex space-x-1">
+                      {[...Array(5)].map((_, index) => (
+                        <Star key={index} size={16} className="fill-orange-500 text-orange-500" />
+                      ))}
+                    </div>
+                    <p className="text-zinc-300 font-light leading-relaxed text-2xl md:text-3xl italic font-serif">
+                      "{testimonials[activeIndex].text}"
+                    </p>
                   </div>
-                  <div>
-                    <h4 className="text-white font-bold text-sm uppercase tracking-widest">{testimonial.name}</h4>
-                    <p className="text-zinc-600 text-[10px] uppercase tracking-widest">{testimonial.role}</p>
+
+                  <div className="mt-8 pt-8 border-t border-white/5 flex items-center space-x-6 relative z-10">
+                    <div className="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-orange-500 font-serif text-2xl">
+                      {testimonials[activeIndex].name.charAt(0)}
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-lg uppercase tracking-[0.2em]">{testimonials[activeIndex].name}</h4>
+                      <p className="text-zinc-600 text-[10px] uppercase tracking-widest">{testimonials[activeIndex].role}</p>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Dots Indicator */}
+            <div className="flex justify-center mt-12 space-x-3">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setDirection(i > activeIndex ? 1 : -1);
+                    setActiveIndex(i);
+                  }}
+                  className={`w-2 h-2 rounded-full transition-all duration-500 ${
+                    i === activeIndex 
+                      ? 'bg-orange-500 w-8' 
+                      : 'bg-zinc-800 hover:bg-zinc-700'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
