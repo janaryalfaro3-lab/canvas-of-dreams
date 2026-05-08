@@ -552,25 +552,47 @@ export default function Gallery() {
                     >
                       <AnimatePresence>
                         {sessionLikes.has(item.id) && (
-                          <motion.div
-                            initial={{ opacity: 1, y: 0, scale: 1 }}
-                            animate={{ opacity: 0, y: -40, scale: 1.5 }}
-                            exit={{ opacity: 0 }}
-                            className="absolute -top-4 text-red-500 pointer-events-none z-10"
-                          >
-                            <Heart size={20} fill="currentColor" />
-                          </motion.div>
+                          <>
+                            {/* Main Floating Heart */}
+                            <motion.div
+                              initial={{ opacity: 1, y: 0, scale: 1 }}
+                              animate={{ opacity: 0, y: -60, scale: 2, rotate: [0, 15, -15, 0] }}
+                              exit={{ opacity: 0 }}
+                              className="absolute -top-4 text-red-500 pointer-events-none z-10"
+                            >
+                              <Heart size={20} fill="currentColor" />
+                            </motion.div>
+                            {/* Tiny Bursts */}
+                            {[...Array(4)].map((_, i) => (
+                              <motion.div
+                                key={i}
+                                initial={{ opacity: 1, x: 0, y: 0, scale: 0.5 }}
+                                animate={{ 
+                                  opacity: 0, 
+                                  x: (i % 2 === 0 ? 1 : -1) * (Math.random() * 30 + 10), 
+                                  y: -(Math.random() * 40 + 20),
+                                  scale: 1,
+                                  rotate: Math.random() * 90 
+                                }}
+                                transition={{ duration: 0.6, ease: "easeOut" }}
+                                className="absolute top-2 text-red-400 pointer-events-none z-0"
+                              >
+                                <Heart size={8} fill="currentColor" />
+                              </motion.div>
+                            ))}
+                          </>
                         )}
                       </AnimatePresence>
 
                       <motion.div
-                        whileTap={{ scale: 0.8 }}
+                        whileTap={{ scale: 0.6 }}
                         animate={sessionLikes.has(item.id) ? {
-                          scale: [1, 1.3, 1],
-                          transition: { duration: 0.3 }
+                          scale: [1, 1.4, 1],
+                          rotate: [0, 10, -10, 0],
+                          transition: { duration: 0.4, ease: "backOut" }
                         } : item.likesCount > 50 ? {
                           scale: [1, 1.1, 1],
-                          filter: ["drop-shadow(0 0 0px rgba(239, 68, 68, 0))", "drop-shadow(0 0 8px rgba(239, 68, 68, 0.6))", "drop-shadow(0 0 0px rgba(239, 68, 68, 0))"],
+                          filter: ["drop-shadow(0 0 0px rgba(239, 68, 68, 0))", "drop-shadow(0 0 12px rgba(239, 68, 68, 0.4))", "drop-shadow(0 0 0px rgba(239, 68, 68, 0))"],
                         } : {}}
                         transition={item.likesCount > 50 && !sessionLikes.has(item.id) ? {
                           duration: 2,
@@ -579,7 +601,7 @@ export default function Gallery() {
                         } : {}}
                         className={`p-3 backdrop-blur-md rounded-full transition-all duration-300 relative overflow-hidden ${
                           sessionLikes.has(item.id)
-                            ? 'bg-red-500 text-white border border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.4)]'
+                            ? 'bg-red-500 text-white border border-red-500 shadow-[0_0_30px_rgba(239,68,68,0.5)]'
                             : item.likesCount > 50 
                               ? 'bg-red-500/20 text-red-500 border border-red-500/30' 
                               : 'bg-white/10 hover:bg-white hover:text-red-500 border border-white/10'

@@ -8,6 +8,7 @@ import { db, handleFirestoreError, OperationType } from '../lib/firebase';
 export default function Booking() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -18,6 +19,34 @@ export default function Booking() {
     preferredDate: '',
     preferredTime: ''
   });
+
+  const validateField = (name: string, value: string) => {
+    let error = '';
+    if (name === 'fullName') {
+      if (value.length < 2) error = 'Name is too short';
+    } else if (name === 'email') {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) error = 'Invalid email address';
+    } else if (name === 'vision') {
+      if (value.length < 10) error = 'Please share more about your vision (min 10 chars)';
+    } else if (name === 'preferredDate') {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const selectedDate = new Date(value);
+      if (selectedDate < today) error = 'Date cannot be in the past';
+    } else if (name === 'preferredTime') {
+      if (!value) error = 'Please select a time';
+    }
+
+    setErrors(prev => ({ ...prev, [name]: error }));
+    return error === '';
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    validateField(name, value);
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -36,6 +65,24 @@ export default function Booking() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Final validation check
+    const newErrors: Record<string, string> = {};
+    let isValid = true;
+    
+    Object.keys(formData).forEach(key => {
+      const value = (formData as any)[key];
+      if (typeof value === 'string' && key !== 'referenceImage') {
+        const fieldIsValid = validateField(key, value);
+        if (!fieldIsValid) isValid = false;
+      }
+    });
+
+    if (!isValid) {
+      alert('Please fix the errors in the form before submitting.');
+      return;
+    }
+
     setLoading(true);
     
     try {
@@ -49,7 +96,7 @@ export default function Booking() {
         vision: formData.vision,
         preferredDate: formData.preferredDate,
         preferredTime: formData.preferredTime,
-        referenceImage: formData.referenceImage, // Keep this if needed, but check if rules allow
+        referenceImage: formData.referenceImage, 
         status: 'pending',
         createdAt: serverTimestamp(),
       });
@@ -154,24 +201,32 @@ export default function Booking() {
             <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 ml-1">Full Name</label>
+                  <div className="flex justify-between items-center px-1">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Full Name</label>
+                    {errors.fullName && <span className="text-[9px] text-red-500 font-bold uppercase tracking-widest">{errors.fullName}</span>}
+                  </div>
                   <input 
                     required
+                    name="fullName"
                     type="text" 
                     value={formData.fullName}
-                    onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-6 py-4 focus:outline-none focus:border-orange-500 transition-colors text-zinc-200" 
+                    onChange={handleInputChange}
+                    className={`w-full bg-zinc-900 border ${errors.fullName ? 'border-red-500/50' : 'border-zinc-800'} rounded-xl px-6 py-4 focus:outline-none focus:border-orange-500 transition-colors text-zinc-200`} 
                     placeholder="John Doe" 
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 ml-1">Email Address</label>
+                  <div className="flex justify-between items-center px-1">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Email Address</label>
+                    {errors.email && <span className="text-[9px] text-red-500 font-bold uppercase tracking-widest">{errors.email}</span>}
+                  </div>
                   <input 
                     required
+                    name="email"
                     type="email" 
                     value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-6 py-4 focus:outline-none focus:border-orange-500 transition-colors text-zinc-200" 
+                    onChange={handleInputChange}
+                    className={`w-full bg-zinc-900 border ${errors.email ? 'border-red-500/50' : 'border-zinc-800'} rounded-xl px-6 py-4 focus:outline-none focus:border-orange-500 transition-colors text-zinc-200`} 
                     placeholder="john@example.com" 
                   />
                 </div>
@@ -179,23 +234,31 @@ export default function Booking() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 ml-1">Preferred Date</label>
+                  <div className="flex justify-between items-center px-1">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Preferred Date</label>
+                    {errors.preferredDate && <span className="text-[9px] text-red-500 font-bold uppercase tracking-widest">{errors.preferredDate}</span>}
+                  </div>
                   <input 
                     required
+                    name="preferredDate"
                     type="date" 
                     value={formData.preferredDate}
-                    onChange={(e) => setFormData({...formData, preferredDate: e.target.value})}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-6 py-4 focus:outline-none focus:border-orange-500 transition-colors text-zinc-200" 
+                    onChange={handleInputChange}
+                    className={`w-full bg-zinc-900 border ${errors.preferredDate ? 'border-red-500/50' : 'border-zinc-800'} rounded-xl px-6 py-4 focus:outline-none focus:border-orange-500 transition-colors text-zinc-200`} 
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 ml-1">Preferred Time</label>
+                  <div className="flex justify-between items-center px-1">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Preferred Time</label>
+                    {errors.preferredTime && <span className="text-[9px] text-red-500 font-bold uppercase tracking-widest">{errors.preferredTime}</span>}
+                  </div>
                   <input 
                     required
+                    name="preferredTime"
                     type="time" 
                     value={formData.preferredTime}
-                    onChange={(e) => setFormData({...formData, preferredTime: e.target.value})}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-6 py-4 focus:outline-none focus:border-orange-500 transition-colors text-zinc-200" 
+                    onChange={handleInputChange}
+                    className={`w-full bg-zinc-900 border ${errors.preferredTime ? 'border-red-500/50' : 'border-zinc-800'} rounded-xl px-6 py-4 focus:outline-none focus:border-orange-500 transition-colors text-zinc-200`} 
                   />
                 </div>
               </div>
@@ -204,8 +267,9 @@ export default function Booking() {
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 ml-1">Preferred Artist</label>
                   <select 
+                    name="artist"
                     value={formData.artist}
-                    onChange={(e) => setFormData({...formData, artist: e.target.value})}
+                    onChange={handleInputChange}
                     className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-6 py-4 focus:outline-none focus:border-orange-500 transition-colors text-zinc-200 appearance-none"
                   >
                     <option>John Harry Alfaro</option>
@@ -215,8 +279,9 @@ export default function Booking() {
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 ml-1">Proposed Style</label>
                   <select 
+                    name="style"
                     value={formData.style}
-                    onChange={(e) => setFormData({...formData, style: e.target.value})}
+                    onChange={handleInputChange}
                     className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-6 py-4 focus:outline-none focus:border-orange-500 transition-colors text-zinc-200 appearance-none"
                   >
                     <option>Realism</option>
@@ -229,13 +294,17 @@ export default function Booking() {
               </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 ml-1">Describe Your Vision (Shop Min. ₱1,200)</label>
+                  <div className="flex justify-between items-center px-1">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Describe Your Vision (Shop Min. ₱1,200)</label>
+                    {errors.vision && <span className="text-[9px] text-red-500 font-bold uppercase tracking-widest">{errors.vision}</span>}
+                  </div>
                   <textarea 
                     required
+                    name="vision"
                     rows={4} 
                     value={formData.vision}
-                    onChange={(e) => setFormData({...formData, vision: e.target.value})}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-6 py-4 focus:outline-none focus:border-orange-500 transition-colors text-zinc-200 resize-none" 
+                    onChange={handleInputChange}
+                    className={`w-full bg-zinc-900 border ${errors.vision ? 'border-red-500/50' : 'border-zinc-800'} rounded-xl px-6 py-4 focus:outline-none focus:border-orange-500 transition-colors text-zinc-200 resize-none`} 
                     placeholder="Tell us about the size, placement, and story behind your piece..."
                   ></textarea>
                 </div>

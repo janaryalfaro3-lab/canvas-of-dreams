@@ -205,6 +205,68 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className="py-32 px-6 bg-[#0a0a0a] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-orange-600/5 blur-[120px] rounded-full -mr-48 -mt-48" />
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-24 space-y-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 mb-2"
+            >
+              Testimonials
+            </motion.div>
+            <h2 className="text-5xl md:text-7xl font-serif">Voices of the <span className="italic italic-text-gradient">Dreamers</span></h2>
+            <p className="text-zinc-500 max-w-2xl mx-auto font-light italic">"Tunay na kwento mula sa mga taong nagtiwala sa aming sining."</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { name: "Marites Dimagiba", role: "Collector", text: "The best talaga ang Canvas of Dreams! Ang linis ng gawa at sobrang bait ng artists. Definitely babalik ako for my next ink!" },
+              { name: "Jun-Jun Santos", role: "Regular Client", text: "Sobrang professional kumuha ng Polynesian designs. Swabe ang kamay ni artist, hindi masyadong masakit. Sulit bawat sentimo!" },
+              { name: "Maria Clara", role: "First-timer", text: "First time ko magpa-tattoo and super kinabahan ako, pero dahil sa chill vibes ng studio, naging kampante ako. Minimalist lines are perfect!" },
+              { name: "Cardo Dalisay", role: "Removal Client", text: "Solid ang Pico-Laser removal dito. Akala ko hindi na matatanggal yung luma kong tattoo, pero after a few sessions, halos wala na. Recommended!" },
+              { name: "Baby Girl", role: "Art Enthusiast", text: "Grabe ang ganda ng vision ko na tinranslate nila into art. Ang talino ng concept designs, unique talaga bawat piraso." },
+              { name: "Lolo Pepe", role: "Local Legend", text: "Kwentuhan habang tinatattooan, ramdam mo yung passion nila. Hindi lang basta business, talagang art ang priority dito sa studio." }
+            ].map((testimonial, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                className="p-10 rounded-[2.5rem] bg-zinc-950 border border-zinc-900 flex flex-col justify-between hover:border-orange-500/30 transition-all duration-500 group relative"
+              >
+                <div className="absolute top-8 right-10 text-orange-500/20 group-hover:text-orange-500/40 transition-colors">
+                  <Star size={40} />
+                </div>
+                <div className="space-y-4">
+                  <div className="flex space-x-1">
+                    {[...Array(5)].map((_, index) => (
+                      <Star key={index} size={12} className="fill-orange-500 text-orange-500" />
+                    ))}
+                  </div>
+                  <p className="text-zinc-400 font-light leading-relaxed text-lg italic">
+                    "{testimonial.text}"
+                  </p>
+                </div>
+                <div className="mt-8 pt-8 border-t border-white/5 flex items-center space-x-4">
+                  <div className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-orange-500 font-serif text-xl">
+                    {testimonial.name.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-sm uppercase tracking-widest">{testimonial.name}</h4>
+                    <p className="text-zinc-600 text-[10px] uppercase tracking-widest">{testimonial.role}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Specialization Section - Tattoo Removal & Packages */}
       <section className="py-32 px-6 bg-[#080808] border-y border-white/5 relative">
         <div className="max-w-7xl mx-auto">

@@ -61,8 +61,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     return res.status(200).json({ success: true, message: 'Booking inquiry processed and confirmation email sent.' });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error sending email:', error);
-    return res.status(500).json({ error: 'Failed to process request.' });
+    const errorMessage = error.code === 'EAI_AGAIN' || error.code === 'ENOTFOUND'
+      ? `Connectivity/DNS error. Please check if your SMTP_HOST ("${process.env.SMTP_HOST}") is correct.`
+      : 'Failed to process request.';
+    return res.status(500).json({ error: errorMessage });
   }
 }

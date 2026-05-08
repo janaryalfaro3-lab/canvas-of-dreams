@@ -92,9 +92,12 @@ async function startServer() {
       }
 
       res.status(200).json({ success: true, message: 'Booking inquiry processed and confirmation email sent.' });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error sending email:', error);
-      res.status(500).json({ error: 'Failed to send confirmation email, but request logged.' });
+      const errorMessage = error.code === 'EAI_AGAIN' || error.code === 'ENOTFOUND' 
+        ? `Connectivity/DNS error. Please check if your SMTP_HOST ("${process.env.SMTP_HOST}") is correct.`
+        : 'Failed to send confirmation email, but request logged.';
+      res.status(500).json({ error: errorMessage });
     }
   });
 
@@ -131,8 +134,12 @@ async function startServer() {
 
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on http://localhost:${PORT}`);
+    if (process.env.SMTP_HOST) {
+      console.log(`SMTP Host configured: ${process.env.SMTP_HOST.substring(0, 3)}...`);
+    } else {
+      console.log('SMTP Host not configured, using default ethereal.');
+    }
   });
 }
 
-startServer(); export const LOGO_URL = "/logo.jpg";
-export const FALLBACK_LOGO_URL = "https://scontent.fmnl17-5.fna.fbcdn.net/v/t39.30808-6/472457306_122121870752610387_8965074152194860895_n.jpg?...";
+startServer();
