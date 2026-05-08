@@ -3,8 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
+import { LOGO_URL, FALLBACK_LOGO_URL } from '../constants';
 
 export default function Navbar() {
+  const [logoSrc, setLogoSrc] = useState(LOGO_URL);
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -41,10 +43,15 @@ export default function Navbar() {
         <Link to="/" className="flex items-center space-x-4 group">
           <div className="w-12 h-12 rounded-full overflow-hidden border border-white/10 group-hover:border-orange-500/50 transition-all duration-500 shadow-2xl">
             <img 
-              src="https://scontent.fmnl17-5.fna.fbcdn.net/v/t39.30808-6/472457306_122121870752610387_8965074152194860895_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=NU7dA5a41-UQ7kNvwGjqcLi&_nc_oc=AdrdPK2YxeYoUQ87_varUb-Ap6rhyzGDKRrvk6xuFAST5GZiH-34Clccuz2IWCuNBE8&_nc_zt=23&_nc_ht=scontent.fmnl17-5.fna&_nc_gid=kY1Y9yV-LJyNaeGCDm5rNg&_nc_ss=7b2a8&oh=00_Af3avINw-4p1hErGNznFL5tWIeJT8dCNDC7FEvAMqCAqDg&oe=69F65804" 
+              src={logoSrc} 
               alt="Logo" 
               className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700"
               referrerPolicy="no-referrer"
+              onError={() => {
+                if (logoSrc !== FALLBACK_LOGO_URL) {
+                  setLogoSrc(FALLBACK_LOGO_URL);
+                }
+              }}
             />
           </div>
           <div className="flex flex-col">

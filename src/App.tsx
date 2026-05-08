@@ -16,6 +16,7 @@ function AnimatedRoutes() {
 
   return (
     <AnimatePresence mode="wait">
+      {/* @ts-ignore - key is required for AnimatePresence but not in Routes standard props */}
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/artists" element={<Artists />} />

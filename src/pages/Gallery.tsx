@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Heart, X, ZoomIn, Info, Database, Sparkles, Loader2, Search, Tag } from 'lucide-react';
 import PageTransition from '../components/PageTransition';
+import { LOGO_URL, FALLBACK_LOGO_URL } from '../constants';
 import { 
   collection, 
   onSnapshot, 
@@ -231,6 +232,7 @@ function ImageWithPlaceholder({ src, alt, className }: { src: string; alt: strin
 }
 
 export default function Gallery() {
+  const [logoSrc, setLogoSrc] = useState(LOGO_URL);
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeCategory, setActiveCategory] = useState('All');
   const [activeArtist, setActiveArtist] = useState('All Artists');
@@ -483,10 +485,15 @@ export default function Gallery() {
                 {!item.hideWatermark && (
                   <div className="absolute top-6 left-6 w-12 h-12 rounded-full overflow-hidden border border-white/20 opacity-40 group-hover:opacity-80 transition-opacity duration-700 mixture-blend-overlay">
                     <img 
-                      src="https://scontent.fmnl17-5.fna.fbcdn.net/v/t39.30808-6/472457306_122121870752610387_8965074152194860895_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=NU7dA5a41-UQ7kNvwGjqcLi&_nc_oc=AdrdPK2YxeYoUQ87_varUb-Ap6rhyzGDKRrvk6xuFAST5GZiH-34Clccuz2IWCuNBE8&_nc_zt=23&_nc_ht=scontent.fmnl17-5.fna&_nc_gid=kY1Y9yV-LJyNaeGCDm5rNg&_nc_ss=7b2a8&oh=00_Af3avINw-4p1hErGNznFL5tWIeJT8dCNDC7FEvAMqCAqDg&oe=69F65804" 
+                      src={logoSrc} 
                       alt="Logo Watermark" 
                       className="w-full h-full object-cover grayscale brightness-200"
                       referrerPolicy="no-referrer"
+                      onError={() => {
+                        if (logoSrc !== FALLBACK_LOGO_URL) {
+                          setLogoSrc(FALLBACK_LOGO_URL);
+                        }
+                      }}
                     />
                   </div>
                 )}
@@ -633,10 +640,15 @@ export default function Gallery() {
               {!selectedImage.hideWatermark && (
                 <div className="absolute top-8 left-8 w-16 h-16 rounded-full overflow-hidden border border-white/10 opacity-30 pointer-events-none">
                   <img 
-                    src="https://scontent.fmnl17-5.fna.fbcdn.net/v/t39.30808-6/472457306_122121870752610387_8965074152194860895_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=NU7dA5a41-UQ7kNvwGjqcLi&_nc_oc=AdrdPK2YxeYoUQ87_varUb-Ap6rhyzGDKRrvk6xuFAST5GZiH-34Clccuz2IWCuNBE8&_nc_zt=23&_nc_ht=scontent.fmnl17-5.fna&_nc_gid=kY1Y9yV-LJyNaeGCDm5rNg&_nc_ss=7b2a8&oh=00_Af3avINw-4p1hErGNznFL5tWIeJT8dCNDC7FEvAMqCAqDg&oe=69F65804" 
+                    src={logoSrc} 
                     alt="Watermark" 
                     className="w-full h-full object-cover grayscale"
                     referrerPolicy="no-referrer"
+                    onError={() => {
+                      if (logoSrc !== FALLBACK_LOGO_URL) {
+                        setLogoSrc(FALLBACK_LOGO_URL);
+                      }
+                    }}
                   />
                 </div>
               )}

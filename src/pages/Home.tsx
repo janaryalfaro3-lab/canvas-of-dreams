@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring } from 'motion/react';
 import { ArrowRight, Star, ShieldCheck, Palette, Zap, Eraser, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageTransition from '../components/PageTransition';
+import { VIDEO_HERO, VIDEO_PROCESS } from '../constants';
 
 export default function Home() {
   const mouseX = useMotionValue(0);
@@ -19,16 +20,6 @@ export default function Home() {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
-
-  // Centralized Video Assets
-  const VIDEO_HERO = {
-    local: "/202605021041.mp4",
-    remote: "https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/public/202605021041.mp4"
-  };
-  const VIDEO_PROCESS = {
-    local: "/202605021600.mp4",
-    remote: "https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/public/202605021600.mp4"
-  };
 
   return (
     <PageTransition>

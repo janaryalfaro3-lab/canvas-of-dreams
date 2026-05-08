@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Instagram, Facebook } from 'lucide-react';
 import PageTransition from '../components/PageTransition';
+import { VIDEO_HERO, LOGO_URL, FALLBACK_LOGO_URL } from '../constants';
 
 const artists = [
   {
@@ -32,6 +34,8 @@ const artists = [
 ];
 
 export default function Artists() {
+  const [logoSrc, setLogoSrc] = useState(LOGO_URL);
+
   return (
     <PageTransition>
       <div className="relative">
@@ -44,7 +48,8 @@ export default function Artists() {
           playsInline
           className="w-full h-full object-cover opacity-30"
         >
-          <source src="https://raw.githubusercontent.com/janaryalfaro3-lab/canvas-of-dreams/main/202605021041.mp4" type="video/mp4" />
+          <source src={VIDEO_HERO.local} type="video/mp4" />
+          <source src={VIDEO_HERO.remote} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-zinc-950/70" />
       </div>
@@ -141,10 +146,15 @@ export default function Artists() {
                         {/* Logo Watermark */}
                         <div className="absolute top-4 left-4 w-8 h-8 rounded-full overflow-hidden border border-white/10 opacity-20 group-hover/ex:opacity-60 transition-opacity duration-500 pointer-events-none">
                           <img 
-                            src="https://scontent.fmnl17-5.fna.fbcdn.net/v/t39.30808-6/472457306_122121870752610387_8965074152194860895_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=NU7dA5a41-UQ7kNvwGjqcLi&_nc_oc=AdrdPK2YxeYoUQ87_varUb-Ap6rhyzGDKRrvk6xuFAST5GZiH-34Clccuz2IWCuNBE8&_nc_zt=23&_nc_ht=scontent.fmnl17-5.fna&_nc_gid=kY1Y9yV-LJyNaeGCDm5rNg&_nc_ss=7b2a8&oh=00_Af3avINw-4p1hErGNznFL5tWIeJT8dCNDC7FEvAMqCAqDg&oe=69F65804" 
+                            src={logoSrc} 
                             alt="Logo Watermark" 
                             className="w-full h-full object-cover grayscale brightness-200"
                             referrerPolicy="no-referrer"
+                            onError={() => {
+                              if (logoSrc !== FALLBACK_LOGO_URL) {
+                                setLogoSrc(FALLBACK_LOGO_URL);
+                              }
+                            }}
                           />
                         </div>
                       </motion.div>

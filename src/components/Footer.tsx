@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Mail, MapPin, Phone, ShieldCheck, CreditCard } from 'lucide-react';
+import { LOGO_URL, FALLBACK_LOGO_URL } from '../constants';
 
 export default function Footer() {
+  const [logoSrc, setLogoSrc] = useState(LOGO_URL);
+
   return (
     <footer className="bg-black border-t border-white/5 pt-32 pb-12 px-6 relative overflow-hidden">
        {/* Background Accent */}
@@ -14,10 +18,15 @@ export default function Footer() {
           <div className="flex items-center space-x-4">
              <div className="w-14 h-14 rounded-full overflow-hidden border border-white/10 p-1">
                 <img 
-                  src="https://scontent.fmnl17-5.fna.fbcdn.net/v/t39.30808-6/472457306_122121870752610387_8965074152194860895_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=NU7dA5a41-UQ7kNvwGjqcLi&_nc_oc=AdrdPK2YxeYoUQ87_varUb-Ap6rhyzGDKRrvk6xuFAST5GZiH-34Clccuz2IWCuNBE8&_nc_zt=23&_nc_ht=scontent.fmnl17-5.fna&_nc_gid=kY1Y9yV-LJyNaeGCDm5rNg&_nc_ss=7b2a8&oh=00_Af3avINw-4p1hErGNznFL5tWIeJT8dCNDC7FEvAMqCAqDg&oe=69F65804" 
+                  src={logoSrc} 
                   alt="Logo" 
                   className="w-full h-full object-cover rounded-full"
                   referrerPolicy="no-referrer"
+                  onError={() => {
+                    if (logoSrc !== FALLBACK_LOGO_URL) {
+                      setLogoSrc(FALLBACK_LOGO_URL);
+                    }
+                  }}
                 />
               </div>
               <div className="flex flex-col">
