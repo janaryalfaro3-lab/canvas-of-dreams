@@ -41,6 +41,54 @@ interface GalleryItem {
 const fallbackItems = [
   { 
     category: 'Featured', 
+    src: 'https://i.pinimg.com/1200x/db/b6/6d/dbb66d51fae48aae261fb577f79cf36b.jpg', 
+    artist: 'John Harry Alfaro',
+    title: 'Gothic Radiance',
+    likesCount: 567,
+    tags: ['featured', 'gothic', 'ornamental']
+  },
+  { 
+    category: 'Featured', 
+    src: 'https://scontent.fmnl17-2.fna.fbcdn.net/v/t39.30808-6/472714353_122122735736610387_8414884550725892404_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeErODcp63L71BkAkbfYL6FYHCJbXZUPT7scIltdlQ9Pu_hZmlVm1Y6Gr0gwh8lCAEmEN-ymwt2SW2cTOr0tLzHn&_nc_ohc=dpm0ZYy6AQsQ7kNvwHMD7z5&_nc_oc=AdpZ-tglbMFD4ZJCElDjfb8moOhqAPPed7e_NFaPecpwmgS7HuX-8OJ5vHf2tVzGLvk&_nc_zt=23&_nc_ht=scontent.fmnl17-2.fna&_nc_gid=qgv88yz0ljjCtj8KGSTx0A&_nc_ss=7b2a8&oh=00_Af4_jZbeLpEGlq_IVsTUBJSveRwTFJIQgFSKJNN1XA4BYA&oe=69FB8FDF', 
+    artist: 'John Harry Alfaro',
+    title: 'Soul Portrait',
+    likesCount: 412,
+    tags: ['portrait', 'realism', 'soul']
+  },
+  { 
+    category: 'Featured', 
+    src: 'https://scontent.fmnl17-2.fna.fbcdn.net/v/t39.30808-6/472761786_122122735784610387_7339601769517799079_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeG5Me9J5Tm7wPb8SoCKHUwMoN2sq1tHjyCg3ayrW0ePINVcEfdOTb-KUL_Sl78GiLRA5rWrh8Vjj9VEuDE81Klv&_nc_ohc=chHIVF9sAIoQ7kNvwH9OyvM&_nc_oc=Adq8twIfAV-l1VocBS_70rgv4n3v_um3sdAtogdMBSb2H2k-XZmON4jW5NRbaByAxbs&_nc_zt=23&_nc_ht=scontent.fmnl17-2.fna&_nc_gid=-pOcKTRkbdjCtY50Wil76A&_nc_ss=7b2a8&oh=00_Af6AYsgyZs_JdqYNri1aHQdqWM3p8WTuW5YUJ0jPN5-NSw&oe=69FBC7DD', 
+    artist: 'John Harry Alfaro',
+    title: 'Midnight Bloom',
+    likesCount: 523,
+    tags: ['bloom', 'dark', 'floral']
+  },
+  { 
+    category: 'Featured', 
+    src: 'https://scontent.fmnl17-5.fna.fbcdn.net/v/t39.30808-6/472753841_122122735796610387_1443509039080581486_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeEpR-mxq2JlqDwC7N2eQs9TSHj4bAkT6sNIePhsCRPqw4zoYR7_Z8b1JbLURRENZ7xjc4yiKUzFUM4GKcr6Z58H&_nc_ohc=zxnSz_jdTLQQ7kNvwElaPuv&_nc_oc=AdpcnBOI36h5Ujo1tvKWEjxFnQ7bEHxSwD4nfxvi3Iggx_1tGvyUIgSMGDlrtoga1yQ&_nc_zt=23&_nc_ht=scontent.fmnl17-5.fna&_nc_gid=LTLH3yFIFHVlXzRED5S9aw&_nc_ss=7b2a8&oh=00_Af5LOMuT_CYvil6App0601eMfpdqwhKuHk9Ly0A9ASojoQ&oe=69FCB74C', 
+    artist: 'John Harry Alfaro',
+    title: 'Divine Symmetry II',
+    likesCount: 389,
+    tags: ['divine', 'symmetry', 'sacred']
+  },
+  { 
+    category: 'Polynesian', 
+    src: 'https://scontent.fmnl17-1.fna.fbcdn.net/v/t39.30808-6/472756725_122122735760610387_553627506437421880_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeGZ4lhwdAcENoiRkVyyhLanTBHkWx1t0BVMEeRbHW3QFcludnmtI0e62PP9dmRf9-Ym_yKAYmn3OreNFGhEFDKP&_nc_ohc=NvV1LHHohxMQ7kNvwHEkjAo&_nc_oc=AdqesNSRAWVAduyveZngjOTT8LYjrUC3DYqXrYbCT4tt-fvrGDc6k5YK3wekN87D5TM&_nc_zt=23&_nc_ht=scontent.fmnl17-1.fna&_nc_gid=Gr2-_ljKa9x-UuEGz2dMFA&_nc_ss=7b2a8&oh=00_Af5jl6IKE7YgzqhgMtG5iT6QMhvrmb6JTVpfl0a5h0JQfQ&oe=69FB7656', 
+    artist: 'John Harry Alfaro',
+    title: 'Oceanic Flow',
+    likesCount: 278,
+    tags: ['polynesian', 'wave', 'blue']
+  },
+  { 
+    category: 'Conceptual', 
+    src: 'https://scontent.fmnl17-7.fna.fbcdn.net/v/t39.30808-6/472752436_122122735904610387_2482383672124914614_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeE429OobjFBoTuymsZBPyskr3-pkz_D5Wavf6mTP8PlZh1-_l5v6i4fuWnOXq_UGLBm0KrJzc6cNnjHuPX0pU1q&_nc_ohc=9neB2EhPn6MQ7kNvwGUIbdE&_nc_oc=AdpOBv0bAIt9nffk5PsYblCcVal1exfzld6pos5ADF7Pgcpp9AyHchdD-HX5BGPrs8U&_nc_zt=23&_nc_ht=scontent.fmnl17-7.fna&_nc_gid=ZZCksp78LJqwfKXDLV4f_g&_nc_ss=7b2a8&oh=00_Af7mldxIlqduV2RSOCqLygzw-o7UfD6eKFpvT3_gomCkOg&oe=69FBC6AD', 
+    artist: 'John Harry Alfaro',
+    title: 'Ethereal Forest',
+    likesCount: 195,
+    tags: ['forest', 'nature', 'conceptual']
+  },
+  { 
+    category: 'Featured', 
     src: 'https://i.pinimg.com/1200x/8f/c0/4f/8fc04f9d284aaa8e7b31acfa7d909727.jpg', 
     artist: 'John Harry Alfaro',
     title: 'Divine Symmetry',
@@ -70,14 +118,6 @@ const fallbackItems = [
     title: 'Tribal Spirit',
     likesCount: 89,
     tags: ['polynesian', 'armband', 'culture']
-  },
-  { 
-    category: 'Minimalist', 
-    src: 'https://i.pinimg.com/736x/80/29/b3/8029b34632f0014816cda79d43cd2c94.jpg', 
-    artist: 'Bellamy Villanueva',
-    title: 'Symbolic Dot',
-    likesCount: 34,
-    tags: ['minimalist', 'dotwork', 'fine-line']
   },
   { 
     category: 'Conceptual', 
@@ -112,28 +152,12 @@ const fallbackItems = [
     tags: ['shadow', 'dark', 'portrait']
   },
   { 
-    category: 'Minimalist', 
-    src: 'https://i.pinimg.com/736x/d0/75/1b/d0751be9e2442d53e64138296ba4519f.jpg', 
-    artist: 'Bellamy Villanueva',
-    title: 'Inner Peace',
-    likesCount: 112,
-    tags: ['peace', 'symbol', 'minimalist']
-  },
-  { 
     category: 'Featured', 
     src: 'https://i.pinimg.com/736x/75/6d/d0/756dd0f7f019b711dd1124841cddfc8d.jpg', 
     artist: 'John Harry Alfaro',
     title: 'Divine Oracle',
     likesCount: 204,
     tags: ['divine', 'oracle', 'spirituality']
-  },
-  { 
-    category: 'Minimalist', 
-    src: 'https://i.pinimg.com/736x/05/1a/78/051a780e6a1bb2ee14641e92547fafb8.jpg', 
-    artist: 'Bellamy Villanueva',
-    title: 'Ethereal Lines',
-    likesCount: 85,
-    tags: ['lines', 'ethereal', 'delicate']
   },
   { 
     category: 'Conceptual', 
@@ -144,67 +168,36 @@ const fallbackItems = [
     tags: ['obsidian', 'black', 'dream']
   },
   { 
-    category: 'Featured', 
-    src: 'https://scontent.fcrk1-2.fna.fbcdn.net/v/t39.30808-6/472815714_122122735376610387_5727645778687684071_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=7b2446&_nc_ohc=spIW-dfJTt8Q7kNvwF8q89t&_nc_oc=AdqjQe246eOhJdsSQOFvoqBAYap_ki5U7y4SPe7j1lsS4IBjMJaPjWEhV0k9DkXMANI&_nc_zt=23&_nc_ht=scontent.fcrk1-2.fna&_nc_gid=IUkM58KpI7paVCh4Sg4Ppg&_nc_ss=7b2a8&oh=00_Af4moWqdTKP4HNxAO0px9cOEM_DvTvlJGR9OJ8DpqF57wA&oe=69FB9742', 
-    artist: 'John Harry Alfaro',
-    title: 'Sacred Mark I',
-    likesCount: 189,
-    hideWatermark: true,
-    tags: ['sacred', 'mark', 'ink']
-  },
-  { 
-    category: 'Polynesian', 
-    src: 'https://scontent.fcrk1-3.fna.fbcdn.net/v/t39.30808-6/472756725_122122735760610387_553627506437421880_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=7b2446&_nc_ohc=iWRs_YCDGroQ7kNvwGeZB1f&_nc_oc=AdpFw6EMn2ATkW8f0XaVHPyR3yPWrKUu0CIxQroNZCWmvPyvAUbW6VR1blSXoSHU22k&_nc_zt=23&_nc_ht=scontent.fcrk1-3.fna&_nc_gid=4hqMWzAsHzdoIP9EliOSLg&_nc_ss=7b2a8&oh=00_Af6nO2Kg_ii0LHwrggZ2MWooLjSR8wY6EjdPz60J5fcALw&oe=69FB7656', 
-    artist: 'John Harry Alfaro',
-    title: 'Flow of Life',
-    likesCount: 231,
-    hideWatermark: true,
-    tags: ['flow', 'life', 'polynesian']
-  },
-  { 
-    category: 'Featured', 
-    src: 'https://scontent.fcrk1-4.fna.fbcdn.net/v/t39.30808-6/472714353_122122735736610387_8414884550725892404_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=7b2446&_nc_ohc=XUWzHx_1OB4Q7kNvwERr3VW&_nc_oc=AdpfrdPhxGX3oDRGzgCdcPUEQfIOVgJtqDebXtEdm1AaR1Z284PNct1_yiUwQBWLlXk&_nc_zt=23&_nc_ht=scontent.fcrk1-4.fna&_nc_gid=iZDkw-YOlcXMP6i4Fp1_tQ&_nc_ss=7b2a8&oh=00_Af6cBQTm3IqArpg1TY82N9kZgcnpgXUQM1oD3K3_Vw_kRA&oe=69FB8FDF', 
-    artist: 'John Harry Alfaro',
-    title: 'Ethereal Soul',
-    likesCount: 167,
-    hideWatermark: true,
-    tags: ['soul', 'ethereal', 'portrait']
+    category: 'Minimalist', 
+    src: 'https://scontent.fmnl17-3.fna.fbcdn.net/v/t39.30808-6/472696051_122122735424610387_5483764940073228930_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeFQrvf2YZnuFRG6ZvguGoWM8hzevPTnq4TyHN689OerhNZhQQz8vNrL6oEEvwq4XvODSvxQWxQpNOk4Uw_iBNVp&_nc_ohc=8XBwIy8OQtUQ7kNvwFgHi0b&_nc_oc=Adr1Jyllr1L80r6_YISTzcM5T__8_MLS45blkxTe2w_Wk0tMSFtZBfv0oG00dO7hJcI&_nc_zt=23&_nc_ht=scontent.fmnl17-3.fna&_nc_gid=oXKtttUvk8aUr0-XBDdPIA&_nc_ss=7b2a8&oh=00_Af77w8_P6m-4NvsWdVQfQv5FlHMVeNizpNFby7rN5s4RBQ&oe=69FBC33F', 
+    artist: 'Bellamy Villanueva',
+    title: 'Silent Whisper',
+    likesCount: 156,
+    tags: ['minimalist', 'whisper', 'fine-line']
   },
   { 
     category: 'Minimalist', 
-    src: 'https://scontent.fcrk1-3.fna.fbcdn.net/v/t39.30808-6/472696051_122122735424610387_5483764940073228930_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=7b2446&_nc_ohc=vffReFsjOJoQ7kNvwE836Gp&_nc_oc=AdrnGTLVCt1iDloLWM4_BPHnsDJQj7mQ_hhX-sBJP8VEsZAUj1Ck8reALaaozKTPF1M&_nc_zt=23&_nc_ht=scontent.fcrk1-3.fna&_nc_gid=PMw0uHRgebpRRVbg_sKroA&_nc_ss=7b2a8&oh=00_Af7DBR7nMHToq-JlYi7xhbd5EUTN_UL9QcfBhab97fLyLA&oe=69FB633F', 
+    src: 'https://i.pinimg.com/736x/80/29/b3/8029b34632f0014816cda79d43cd2c94.jpg', 
     artist: 'Bellamy Villanueva',
-    title: 'Line of Truth',
-    likesCount: 142,
-    hideWatermark: true,
-    tags: ['line', 'truth', 'minimalist']
+    title: 'Symbolic Dot',
+    likesCount: 34,
+    tags: ['minimalist', 'dotwork', 'fine-line']
   },
   { 
-    category: 'Featured', 
-    src: 'https://scontent.fcrk1-2.fna.fbcdn.net/v/t39.30808-6/472713341_122122735868610387_5056462905182875381_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=7b2446&_nc_ohc=j2ahh7eHbV8Q7kNvwHpYaJd&_nc_oc=AdorcTR6u27DkP6OPa8FVAjDfeqWuJTxHBZ7vAeTjETXuJOLQU7l4aPiBBMnYo93n1E&_nc_zt=23&_nc_ht=scontent.fcrk1-2.fna&_nc_gid=TfkuIekO0GRF4GXB5ha7lQ&_nc_ss=7b2a8&oh=00_Af6JSfmhzuxl0rQDijlLnL_IfDco8_1ncqKgtkW3gLPh5Q&oe=69FB61B8', 
-    artist: 'John Harry Alfaro',
-    title: 'Shadow Work',
-    likesCount: 198,
-    hideWatermark: true,
-    tags: ['shadow', 'work', 'blackwork']
+    category: 'Minimalist', 
+    src: 'https://i.pinimg.com/736x/d0/75/1b/d0751be9e2442d53e64138296ba4519f.jpg', 
+    artist: 'Bellamy Villanueva',
+    title: 'Inner Peace',
+    likesCount: 112,
+    tags: ['peace', 'symbol', 'minimalist']
   },
   { 
-    category: 'Conceptual', 
-    src: 'https://scontent.fcrk1-2.fna.fbcdn.net/v/t39.30808-6/472761052_122122735694610387_2788952220747292480_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=7b2446&_nc_ohc=-FIU8hdkVogQ7kNvwHA3oKL&_nc_oc=AdovnNDp7jTT33wm1Ed0C53qLwaXhhnJCa_g2HXwduHE6kW1L6jXBtbrmAHSHpvlTX4&_nc_zt=23&_nc_ht=scontent.fcrk1-2.fna&_nc_gid=uJ0IDvtftaUWokDHnvkXEQ&_nc_ss=7b2a8&oh=00_Af6sjRO-vVJW_d78e16H5Tk4GzhZzPU7lFgiBZcIMMrNKQ&oe=69FB9717', 
-    artist: 'John Harry Alfaro',
-    title: 'Deep Roots',
-    likesCount: 225,
-    hideWatermark: true,
-    tags: ['roots', 'deep', 'nature']
-  },
-  { 
-    category: 'Featured', 
-    src: 'https://scontent.fcrk1-1.fna.fbcdn.net/v/t39.30808-6/472761786_122122735784610387_7339601769517799079_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=7b2446&_nc_ohc=5TLYBQGj-H0Q7kNvwEUlDN1&_nc_oc=AdrUQmuqL0JmqC3Bo8nNLfgJt3_7Ko8gUKUOqmvvE6sG2E-JZydTm3E99b13ergTQ_o&_nc_zt=23&_nc_ht=scontent.fcrk1-1.fna&_nc_gid=t5R90rgV1HwYs0bo2GMlBw&_nc_ss=7b2a8&oh=00_Af4758RnauOxNQw9QVNP9LlxK_bm0CyLHNs8euaswHB01w&oe=69FB67DD', 
-    artist: 'John Harry Alfaro',
-    title: 'Eternal Ink',
-    likesCount: 312,
-    hideWatermark: true,
-    tags: ['eternal', 'ink', 'legacy']
+    category: 'Minimalist', 
+    src: 'https://i.pinimg.com/736x/05/1a/78/051a780e6a1bb2ee14641e92547fafb8.jpg', 
+    artist: 'Bellamy Villanueva',
+    title: 'Ethereal Lines',
+    likesCount: 85,
+    tags: ['lines', 'ethereal', 'delicate']
   }
 ];
 
@@ -212,17 +205,41 @@ function ImageWithPlaceholder({ src, alt, className }: { src: string; alt: strin
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div className="relative w-full h-full bg-zinc-800">
+    <div className="relative w-full h-full bg-zinc-900 overflow-hidden">
       {!isLoaded && (
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-zinc-800 via-zinc-700 to-zinc-800 animate-shimmer" 
-               style={{ backgroundSize: '1000px 100%', animation: 'shimmer 2s infinite linear' }} />
+        <div className="absolute inset-0 z-10">
+          <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center space-y-4">
+            <div className="relative w-16 h-16">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 border-2 border-orange-500/10 border-t-orange-500 rounded-full"
+              />
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute inset-4 bg-orange-500/20 rounded-full blur-sm"
+              />
+            </div>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.3, 0.6, 0.3] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-24 h-1 bg-white/5 rounded-full overflow-hidden"
+            >
+              <motion.div 
+                animate={{ x: [-100, 100] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                className="w-1/2 h-full bg-orange-500/50"
+              />
+            </motion.div>
+          </div>
         </div>
       )}
       <img
         src={src}
         alt={alt}
-        className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-700`}
+        className={`${className} ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-110'} transition-all duration-1000 ease-out`}
         onLoad={() => setIsLoaded(true)}
         referrerPolicy="no-referrer"
         loading="lazy"
